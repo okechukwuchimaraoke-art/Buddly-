@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1877f2" />
+  <title>BUDDLY — Connect with everyone</title>
+  <meta name="description" content="Buddly: connect with friends and communities. Share posts, stories, messages and videos.">
+  <meta name="theme-color" content="#1877f2">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Buddly">
+  <meta property="og:title" content="Buddly: connect with friends and communities">
+  <meta property="og:description" content="Share posts, stories, messages and videos with friends. Invite-only early version.">
+  <meta property="og:url" content="https://okechukwuchimaraoke-art.github.io/Buddly-/">
+  <meta property="og:image" content="https://okechukwuchimaraoke-art.github.io/Buddly-/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://okechukwuchimaraoke-art.github.io/Buddly-/og.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <style>
+    :root{--blue:#1877f2;--blue2:#0866ff;--bg:#f0f2f5;--card:#fff;--text:#1c1e21;--muted:#65676b;--line:#e4e6eb;--soft:#e7f3ff;--shadow:0 1px 2px #0000001a}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px Arial,Helvetica,sans-serif}
+    button,input,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:8px;padding:10px 14px;font-weight:700}
+    .top{height:58px;background:var(--card);display:flex;align-items:center;justify-content:space-between;padding:0 18px;box-shadow:var(--shadow);position:sticky;top:0;z-index:5}
+    .brand{font-size:29px;font-weight:800;color:var(--blue);letter-spacing:-1.5px}.topright{display:flex;gap:9px;align-items:center}.pill{background:var(--bg);border-radius:20px;padding:9px 13px;color:var(--muted);font-size:13px}
+    .layout{max-width:1180px;margin:18px auto;display:grid;grid-template-columns:230px minmax(0,650px) 260px;gap:18px;padding:0 12px}
+    .side,.card{background:var(--card);border-radius:12px;box-shadow:var(--shadow)}.side{padding:14px;height:max-content;position:sticky;top:76px}
+    .side h3{margin:5px 8px 12px;font-size:16px}.navitem{display:flex;align-items:center;gap:11px;padding:11px 9px;border-radius:8px;color:var(--text);font-weight:600}.navitem:hover{background:var(--bg)}
+    .ico{width:27px;text-align:center;font-size:20px}.muted{color:var(--muted)}.feed{min-width:0}.card{margin-bottom:14px;padding:14px}
+    .stories{display:flex;gap:10px;overflow:auto}.story{min-width:105px;height:155px;border-radius:12px;background:linear-gradient(160deg,#8ec5ff,#2563eb);color:white;display:flex;align-items:end;padding:10px;font-weight:700}
+    .story.add{background:linear-gradient(160deg,#fff,#dceaff);color:var(--blue);border:1px solid var(--line)}
+    .composer{display:flex;gap:10px;align-items:center}.avatar img{width:100%;height:100%;object-fit:cover;display:block}.avatar{overflow:hidden;width:40px;height:40px;border-radius:50%;background:#dbeafe;color:var(--blue);display:grid;place-items:center;font-weight:800;flex:none}
+    .composer input{flex:1;border:0;background:var(--bg);border-radius:24px;padding:13px 16px;outline:none;min-width:0}
+    .primary{background:var(--blue);color:white}.secondary{background:var(--bg);color:var(--text)}.danger{background:#fee2e2;color:#991b1b}
+    .posthead{display:flex;align-items:center;gap:10px}.posthead .meta{flex:1}.posthead strong{display:block}.postbody{white-space:pre-wrap;line-height:1.45;margin:13px 0}.postactions{display:flex;gap:6px;border-top:1px solid var(--line);padding-top:9px}.postactions button{flex:1;background:transparent;color:var(--muted)}.postactions button:hover{background:var(--bg)}
+    .commentbox{display:flex;gap:8px;margin-top:10px}.commentbox input{flex:1;min-width:0;border:0;background:var(--bg);border-radius:20px;padding:10px 13px}
+    .comment{padding:7px 10px;background:var(--bg);border-radius:12px;margin-top:7px;font-size:14px}.comment strong{margin-right:5px}
+    .authwrap{max-width:430px;margin:55px auto;padding:0 14px}.auth{padding:24px}.auth h1{color:var(--blue);font-size:34px;margin:0 0 6px}.auth input{width:100%;padding:13px;border:1px solid var(--line);border-radius:8px;margin:7px 0;outline-color:var(--blue)}.auth button{width:100%;margin-top:9px}
+    .hidden{display:none!important}.notice{white-space:pre-wrap;overflow-wrap:anywhere}.liked{color:var(--blue)!important}.notice{padding:11px;border-radius:8px;background:#eff6ff;color:#1d4ed8;margin:10px 0;font-size:14px}.error{background:#fef2f2;color:#b91c1c}.rightbox{padding:14px}.rightbox h3{margin:3px 0 12px}.rightbox p{font-size:14px;color:var(--muted);line-height:1.45}
+    .sectiontitle{font-weight:800;margin:0 0 12px}.empty{text-align:center;padding:30px 10px;color:var(--muted)}
+    @media(max-width:900px){.layout{grid-template-columns:190px minmax(0,1fr)}.rightcol{display:none}}
+    @media(max-width:650px){.top{padding:0 12px}.brand{font-size:25px}.layout{display:block;margin:10px auto;padding:0 9px}.leftcol{display:none}.side{position:static}.topright .pill{display:none}.card{border-radius:10px}.story{min-width:92px;height:135px}}
+  .tabs{position:sticky;top:64px;z-index:4;margin:10px 8px;display:flex;align-items:stretch;border-radius:30px;border:3px solid transparent;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#1877f2,#7c3aed,#d946ef) border-box;box-shadow:0 8px 24px rgba(99,70,255,.28);padding:4px}
+  .tabs button{flex:1;background:transparent;border-radius:24px;color:#272a52;padding:7px 0 11px;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;border:0}.tabs button svg{width:26px;height:26px;fill:currentColor}.tabs button span{font-size:10.5px;font-weight:800;letter-spacing:-.2px}
+  .tabs button+button::before{content:"";position:absolute;left:0;top:18%;bottom:18%;width:1px;background:#e4e6f5}.tabs button.on{color:var(--blue);background:radial-gradient(circle at 30% 20%,#e8f3ff,#cfe4ff)}.tabs button.on::before,.tabs button.on+button::before{display:none}.tabs button.on::after{content:"";position:absolute;bottom:4px;width:38%;height:3.5px;border-radius:3px;background:var(--blue)}
+  .tabs .full{display:none}@media(min-width:480px){.tabs .full{display:inline}.tabs .short{display:none}}
+  .avatarbtn{width:38px;height:38px;border-radius:50%;padding:0;overflow:hidden;background:var(--soft);color:var(--blue);font-weight:800;font-size:14px;border:2px solid var(--blue)}.avatarbtn img{width:100%;height:100%;object-fit:cover;display:block}
+    .bd{position:absolute;top:2px;left:calc(50% + 8px);background:#e41e3f;color:#fff;border-radius:99px;font-size:11px;padding:0 5px;font-style:normal}
+    .chips{display:flex;gap:8px;margin-bottom:12px}.chip{background:var(--card);color:var(--muted);border-radius:99px;padding:7px 14px}.chip.on{background:var(--soft);color:var(--blue)}
+    .postimg{width:100%;border-radius:10px;margin:8px 0;display:block}.photobtn{cursor:pointer;display:inline-block;padding:10px 14px;border-radius:8px;font-weight:700}.lnk{cursor:pointer}
+    .person{display:flex;gap:10px;align-items:center}.person .meta{flex:1;min-width:0;cursor:pointer}.person button{flex:none}.unread{background:var(--soft)}
+    .cover{height:130px;background:linear-gradient(135deg,#8ec5ff,#2563eb)}.pinfo{padding:0 14px 14px}.avatar.big{width:84px;height:84px;font-size:30px;margin-top:-42px;border:4px solid var(--card)}
+  .sheetbg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:50;display:flex;align-items:flex-end;justify-content:center}.sheetbg>div{background:var(--card);width:100%;max-width:560px;border-radius:16px 16px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));max-height:88vh;overflow:auto}
+    .lrow{display:flex;align-items:center;gap:10px;padding:9px 0}.legal h2{margin:18px 0 6px;font-size:18px}.legal p,.legal li{line-height:1.5}.draft{border:1px solid #e0a800;background:#fff8e1;color:#5c4400;padding:10px;border-radius:8px;font-size:13px}
+    .postvid{width:100%;max-height:560px;object-fit:contain;border-radius:10px;margin:8px 0;display:block;background:#000}.tag{background:var(--soft);color:var(--blue);border-radius:6px;font-size:11px;font-weight:700;padding:1px 6px;margin-left:6px}
+  .chatbox{height:50vh;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:10px 2px;margin-top:8px}.bub{max-width:78%;padding:8px 12px;border-radius:16px;line-height:1.35;white-space:pre-wrap;word-break:break-word;background:var(--bg)}.bub.me{align-self:flex-end;background:var(--blue);color:#fff}.bub small{display:block;font-size:10px;opacity:.7;margin-top:2px}
+  .chatwrap{--b1:#1877f2;--b2:#5aa9ff}.bub{cursor:pointer}.bub.me{background:linear-gradient(135deg,var(--b1),var(--b2));color:#fff}.bub img{display:block;max-width:100%;max-height:260px;border-radius:12px;margin-bottom:4px}.bub.big{background:transparent!important;font-size:46px;line-height:1.1;padding:0}.bub.big small{display:none}
+  .mrow{display:flex;flex-direction:column;align-items:flex-start;gap:3px}.mrow.me{align-items:flex-end}.rx{display:flex;gap:4px}.rx span{background:var(--card);border:1px solid var(--line);border-radius:99px;font-size:12px;padding:1px 7px}.rx .mine{border-color:var(--b1)}
+  .rbar{display:flex;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:3px 6px;box-shadow:0 2px 8px #0002}.rbar button{background:transparent;padding:2px 5px;font-size:20px}.rbar .on{background:var(--soft)}.seen{font-size:11px;color:var(--muted)}
+  .daysep{align-self:center;font-size:11px;color:var(--muted);background:var(--bg);border-radius:99px;padding:2px 10px;margin:6px 0}.qrs{display:flex;gap:6px;overflow-x:auto;padding:6px 0}.qrs button{white-space:nowrap;padding:6px 12px;border-radius:99px;font-size:13px}
+  .stickers{display:flex;flex-wrap:wrap;gap:4px}.stickers button{background:transparent;font-size:30px;padding:4px 8px}.swatches{display:flex;gap:10px;padding:8px 2px}.swatches button{width:30px;height:30px;border-radius:50%;padding:0;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+  .story.st{position:relative;overflow:hidden;padding:0;color:#fff;flex:0 0 105px}.story.st>img,.story.st>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.story.st .stn{position:relative;z-index:1;width:100%;padding:22px 8px 8px;background:linear-gradient(transparent,#0009);font-size:13px;font-weight:700;align-self:flex-end}.story.st .sta{position:absolute;top:8px;left:8px;z-index:1;border-radius:50%;box-shadow:0 0 0 3px #bbb}.story.st.ring .sta{box-shadow:0 0 0 3px var(--blue)}
+  .sv{position:fixed;inset:0;z-index:1000;background:#000;color:#fff;display:flex;flex-direction:column}.sv.hidden{display:none}.svbars{display:flex;gap:4px;padding:10px 10px 0;padding-top:max(10px,env(safe-area-inset-top))}.svbars i{flex:1;height:3px;border-radius:2px;background:#fff4}.svbars i.on{background:#fff}
+  .svhead{display:flex;align-items:center;gap:8px;padding:10px;position:relative;z-index:3}.svhead button{background:transparent;color:#fff;font-size:20px;padding:4px 8px}.svmedia{flex:1;display:flex;align-items:center;justify-content:center;min-height:0}.svmedia img,.svmedia video{max-width:100%;max-height:100%;object-fit:contain}
+  .svcap{padding:14px 16px 28px;text-align:center;font-size:16px;position:relative;z-index:3;background:linear-gradient(transparent,#000a)}.svtap{position:absolute;top:80px;bottom:100px;z-index:2}.svtap.l{left:0;width:35%}.svtap.r{right:0;width:65%}.svviews{position:absolute;left:0;right:0;bottom:0;background:#111e;padding:16px;z-index:4;max-height:50%;overflow:auto}.svviews.hidden{display:none}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.authhero{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 14px}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">buddly</div>
+    <div class="topright"><span id="connection" class="pill">Not connected</span><button id="meBtn" class="avatarbtn hidden" data-act="tab" data-id="me" title="My profile"></button><button id="logoutBtn" class="secondary hidden">Log out</button></div>
+  </header>
+  <nav id="tabs" class="tabs hidden" aria-label="Main"><button data-act="tab" data-id="home" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6 2.5 11a1 1 0 0 0 .7 1.7H5V20a1.5 1.5 0 0 0 1.5 1.5H10v-6h4v6h3.5A1.5 1.5 0 0 0 19 20v-7.3h1.8a1 1 0 0 0 .7-1.7z"/></svg><span>Home</span></button><button data-act="tab" data-id="friends"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.7"/><path d="M2.3 20.5a6.7 6.7 0 0 1 13.4 0z"/><circle cx="17.2" cy="9.2" r="3"/><path d="M16.6 14.4a6.2 6.2 0 0 1 5.1 6.1h-4.9a8.6 8.6 0 0 0-2.4-5.2 5.8 5.8 0 0 1 2.2-.9z"/></svg><span>Friends</span><b id="bdFriends" class="bd hidden"></b></button><button data-act="tab" data-id="msgs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.1 2 11.3c0 2.8 1.3 5.3 3.4 7V22l3.3-1.8c1 .3 2.2.5 3.3.5 5.5 0 10-4.1 10-9.3S17.500 2 12 2z"/><path d="M6.6 13.6 10.200 10l2.500 2.300L17.300 8" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Messages</span><b id="bdMsgs" class="bd hidden"></b></button><button data-act="tab" data-id="notif"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.500a1.400 1.400 0 0 1 1.400 1.400v.6c3 .7 5 3.300 5 6.400v3.600l1.900 2.600a1 1 0 0 1-.8 1.600H4.500a1 1 0 0 1-.8-1.600l1.900-2.600v-3.600c0-3.100 2-5.700 5-6.400v-.6A1.400 1.400 0 0 1 12 2.500z"/><path d="M9.300 20.200h5.400a2.700 2.700 0 0 1-5.400 0z"/></svg><span><span class="full">Notifications</span><span class="short">Alerts</span></span><b id="bdNotif" class="bd hidden"></b></button><button data-act="tab" data-id="videos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.500" y="4" width="19" height="16" rx="4.500"/><path fill="#fff" d="M10 8.600v6.800l5.700-3.400z"/></svg><span>Videos</span></button></nav>
+
+  <section id="authView" class="authwrap">
+    <div class="card auth">
+      <h1 class="sr">buddly</h1><img class="authhero" alt="Buddly: connect with friends and communities" src="data:image/jpeg;base64,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8z2r0WKU+AyA0NGGjAXy5fa+SsbGeDxxXS2zz3j2P5HH9S5reFujZvtIsUGm6W2XStioKmiZ0QMxw2Ro5EHly4ELzun6M6lGOor2ZrYqLcVY2aix32RdIj/7itnz4UeyNpD4x2z58LyPRq3qP4M0NSXAyNFjnsjaQ+Mds+fCeyNpD4x2z58JdGreo/gx6kuBkaLHPZG0j8Y7Z8+E9kXSPxjtnz4R0ar6j+DDm5cDI0WO+yLpH4xWz58LxqNp2j6Zjnuv1JJgZxETIT5g0FNYas8lB/Bhzc+DMoWqds2s420/4NUUu9K8h1YW8mN5hnnJwT5B5VQas23SVUT6TTkEkDXDDqucYeP7DerznuWsN580jpJXue95LnOcclxPMk9a72i9EzjNVqytbYvE38LhGpKcyRE1/Mce1DC5gzzHavaNq9gF62DaOxHIpByUr2kg62dy8VlTuZ0FKImWgpQKUikFKIkWgpREikSiKUFoKVAUpFoKQoUpFIKUClBaMdREXUPhKCIiC0EREFIKWudG4PY4tc0ghwOCD2hQiCkbv0FtqpKmCK36mk8HqWgNbWkfi5f7f5p8vLzLaFJcqKvjElJWU9Qw8Q6KQOB7iuQEHDlw8y8xjOS9CtNzpS1L7rXX0OjSx84q0lc7H3m9o703m9o71xxvHtPem8e0960vwj+9/H7mbyh/17/sdj7ze0d6bze0d6443j+ce9N49p70fhH97+P3H0//AK952PvN7R3pvN7R3rjjePae9N49p70fhH97+P3H07/r3nY+83tHem83tHeuON535x703j+ce9H4R/e/j9x9N/6952PvN7R3pvN7R3rjjeP5x71O8fzj3o/CP738fuV0z/qdjbze0d6bze0d6453j2nvTePae9H4R/e/j9x9L6jsbeb2jvTeb2jvXHO8e096bx7T3o/CP738fuPpXUdjbze0d6bze0d6453j2nvTePae9H4R/e/j9x9J6jsbeb2jvTeb2jvXHO8fzj3pvHtPej8I/vfx+4+kdR2NvN7R3pvN7R3rjjePae9N49p70fhH97+P3Hz/AFHY+83tHem83tHeuOd49p703ndp70fhH97+P3Hz3Udjbze0d6bze0d6443j+ce9N4/nHvR+Ef3v4/crneo7H3m9o703m9o71xxvH8496bx7T3o/CP738fuPnOo7H3m9o703m9o71xxvO/OPepye096Pwj+9/H7j1zsbeb2jvTeb2jvXHO8fzj3pk/nHvR+Ef3v4/cesdjbze0d6bze0d6453j2nvTJ7T3o/CP738fuO52NvN7R3pvN7R3rjneP5x703j2nvR+Ef3v4/cZ2NvN7R3pvN7R3rjnJ7T3pvHtPej8I/vfx+47HY283tHerddNS2ayROluNzpKZo/PkGT5hzPoXJWT2nvUdeevtVQ5JRT86rddlvqytU2RtJ2sP1TE+02hskFtJ/GyP4PqMdWOpvk5nr7FrhEXp8JhKWFpqlSVkZErEqVClbBaClEQUgpCKUi0gpUBSkWgpREikFKL6YwvdgJMtExxmQ4H/sqtjAwYCMYGNwF9rDKVxhERSNEr5IX0owkWjyc3K8nNVSWr4LFjkh2KRzD5V8Fh8qqzGo6NYnAdil3D5VPRnyqp6NT0aWoNRKXcPlU7h7Sqro06NLULUSmEZX0Iz5VUdGvoR+RGoUonk2NezGL6axejW4VKJkSDRhegCgBfYVmRIL4lhD+I4O+teilNOxaKHGDxUqomi3hvN919apwsidzMsyUCKUy0ERSkUgpUKUi0FKIEikSiKQgtBEUpFoKQilIpGOIiLqnwpBERBSCIiCkgiIgpBERBaCIiCkERQgpEoiILQREQUgiIgpBERBSCIiC0EREFIIiJFIIiIKQREQWgiIgpBQpRBSCIiCkEREFIIiILQREQUgiIgtBEUpFIKURBaJRFKRSCIpSLQClECCkSgRSpLQRFKC0OarIYujb5TzXlTR5O+erkqlYpy3DClEWMaClESLQUoiCkiMIWr6RSWj43U3V6YTCLDSPjdTcXphAFNi0j43FIYvvCnCLFJHnuqd1feFOErFJHyGr6AUogtIKUUpFIKURBaC8J48eOOXWvdSQCMHkhOxayKIKVL2bjiFCymZBSilItBEUoKQUoESLQUoESLQUopQUgpREi0jHERF1T4SgiIgpBERBaCIiCkEREFIIiIKQREQWgiIgpBERBSCIiCkEREFoIiIKQRESKQREQUgiIgpBERBaCIiCkEREFoIiIKQREQUgiIgpBERBaCIiRSRKIpQWgpUKUikFKIgtEogUpFIKUCJFoBSiJFolS1pc4AdahVFMzm/0BTJ2RR7taGtAHIKUUrAMIEUoKSCBFKRSClQpSLQUoiRSClEQUgpRSkWgFKIkUgpUKUFIKURIpEoilItBERIolAilBSPOdm83I5hU6rFSyN3HkK4vcZoHypRFRkRKIpSLQRFKCkFIUKUi0FKKUi0ERSkUjG0RF1j4UgiIgpBERBSCIiCkERQgpEoiILQREQUgihSgpBERBSCIiC0EREFJBERBSCIiRSCIiC0EREFIIiIKQREQWgiIgpBERBSCIiCkEREFIIiILQUqFKRSClFKC0FKhSkWgpRAkUgpCKUi0gpUKUikFKhSgtBV0bdxgCpIm70jR5VWrFN7igpRFjGgpREikSERSgtBSoUpFIIilIpBSFClItBSgUoKQRESKRKIpSKQUqFKRaClEQUgpREikFKIkWiV41DeAd6F7KJG7zCE07MuO0pFKhSshnQClEQUgpREi0SpUKUi0FKIkUgpRSgtGNIiLrHwlBERBQREQUgiIgpBERBaCIiCkgiIgpBERBSCIiC0EREFIIiIKQRESLQREQUgiIgpBERBSCIiC0EREFIIiIKQREQUgiIgpBERBaCIiRSJUqFKC0FKIkWiURSkUgpUBSgtAKUQJFIlERItEqVClItHtTDLyewKqXhSjg4r3WGe0AiKVJSClQFKRaClESKRKIiRSClEQUiQiKQkWgpREikFKhSgpBSiJFpEqVClIpBEUpFhAilBSClESKRKIiRaKMjBI7FK+pRiR3nXysyM6CkKFKRaClAiC0SiKUikERSkWgpREikjGiiIuufCUE6kRBSCFEQUgiIgpDqUIiCkSUCIgtBERBQREQUgiIgpBERBaCIiCkE6kRIoIiIKQREQWgiIgpBQiILRKFEQUEREFIIiIKQREQUgiIgtBSiJFIlSiILQUhESLQUoiRSJQIiC0SpRFJSClEQy0FKIkUiqpvcHzr2RFhltGSiIoZSJCIiCkSpREiwpREikFIREFIL6RFJaCIiCkSiIkUiQpREi0SiIhlIKURIpEhERItEqURBaCIiTKKeb+UK+ERZVsM8dhIREQWiVKIgpEoiKS0FKIgtEhSiJFI//9k=">
+      <div id="authMessage" class="notice hidden"></div>
+      <input id="fullName" placeholder="Full name" autocomplete="name" />
+      <input id="username" placeholder="Username (e.g. ada123)" autocomplete="username" />
+      <input id="email" type="email" placeholder="Email address" autocomplete="email" />
+      <input id="password" type="password" placeholder="Password (at least 8 characters)" autocomplete="current-password" />
+      <input id="inviteCode" placeholder="Invite code" autocapitalize="characters" maxlength="20" autocomplete="off" />
+      <label class="muted" style="display:flex;gap:8px;align-items:flex-start;font-size:13px;margin:6px 0 10px"><input id="acceptTerms" type="checkbox" style="width:auto;margin-top:3px"> <span>I’m 16 or older and accept the <a href="#" data-act="legal" data-id="terms">Terms</a> and <a href="#" data-act="legal" data-id="privacy">Privacy Policy</a>.</span></label>
+      <button id="signupBtn" class="primary">Create new account</button>
+      <button id="loginBtn" class="secondary">Log in</button>
+      <button id="testBtn" class="secondary" style="background:transparent;border:1px solid var(--line)">Test connection</button>
+      <p id="statusText" class="muted" style="font-size:12px;margin:12px 0 0;text-align:center">Status: checking…</p>
+      <p class="muted" style="font-size:12px;margin:14px 0 0">This is an early development version. <a href="#" data-act="legal" data-id="terms">Terms</a> · <a href="#" data-act="legal" data-id="privacy">Privacy</a></p>
+    </div>
+  </section>
+
+  <main id="appView" class="layout hidden">
+    <aside class="leftcol side">
+      <h3 id="welcomeName">Your space</h3>
+      <div class="navitem" data-act="tab" data-id="home" style="cursor:pointer"><span class="ico">🏠</span>Home</div>
+      <div class="navitem" data-act="tab" data-id="friends" style="cursor:pointer"><span class="ico">👥</span>Friends</div><div class="navitem" data-act="tab" data-id="msgs" style="cursor:pointer"><span class="ico">💬</span>Messages</div>
+      <div class="navitem" data-act="tab" data-id="videos" style="cursor:pointer"><span class="ico">🎬</span>Videos</div>
+      <div class="navitem"><span class="ico">👥</span>Groups <span class="muted">Soon</span></div>
+      <div class="navitem"><span class="ico">🛍️</span>Marketplace <span class="muted">Soon</span></div>
+    </aside>
+
+    <section class="feed"><div id="friendsView" class="hidden"></div><div id="msgsView" class="hidden"></div><div id="videosView" class="hidden"></div><div id="notifView" class="hidden"></div><div id="profileView" class="hidden"></div><div id="settingsView" class="hidden"></div><div id="adminView" class="hidden"></div><div id="homeView">
+      <div class="card">
+        <div class="stories" id="storyRow"><label class="story add" style="cursor:pointer;flex:0 0 105px"><span>＋</span><br>Add story<input id="storyFile" type="file" accept="image/*,video/*" hidden></label></div>
+      </div>
+      <div class="card">
+        <div class="composer"><div class="avatar" id="myAvatar">B</div><input id="postText" placeholder="What's on your mind?" maxlength="5000" /></div>
+        <img id="preview" class="postimg hidden" alt="Selected photo preview"><video id="vpreview" class="postvid hidden" controls playsinline muted></video><div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:8px"><label class="secondary photobtn">📷 Photo<input id="photoInput" type="file" accept="image/*" hidden></label><label class="secondary photobtn">🎬 Video<input id="videoInput" type="file" accept="video/*" hidden></label><span id="photoName" class="muted" style="font-size:13px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span><button id="publishBtn" class="primary">Post</button></div>
+        <div id="postMessage" class="notice hidden"></div>
+      </div>
+      <div class="chips"><button id="fAll" class="chip on">Everyone</button><button id="fFriends" class="chip">Friends</button></div>
+      <div id="posts"><div class="card empty">Sign in to load your feed.</div></div></div>
+    </section>
+
+    <aside class="rightcol side rightbox">
+      <h3>Welcome to BUDDLY</h3>
+      <p>A familiar social experience with an independent identity. Share updates, join conversations and meet your community.</p>
+      <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+      <h3>Coming next</h3><p>Friends, private messaging, groups, reels, marketplace and creator tools.</p>
+      <p style="font-size:12px">This prototype currently supports account access, text, photo and video posts when configured with Supabase.</p>
+    </aside>
+  </main>
+  <div id="layer"></div>
+
+  <script src="config.js"></script>
+  <script>window.BUDDLY_DEFAULTS={SUPABASE_URL:"https://glhdpwbkhyhivsamhhaw.supabase.co",SUPABASE_PUBLISHABLE_KEY:"sb_publishable_73TitJ5h6wUiX_eFbQV4pA_6kvK7Aj4",COMPANY:"BUDDLY Technologies",CONTACT_EMAIL:""};</script>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+    // Credentials come from config.js (public values only). Nothing secret belongs in this app.
+    // Settings come from config.js when it loads; otherwise the built-in public defaults above are used.
+    // (On Android, a page opened from the Files app often cannot load a second file next to it.)
+    const CFG = window.BUDDLY_CONFIG || {}, DEF = window.BUDDLY_DEFAULTS || {};
+    const SUPABASE_URL = (CFG.SUPABASE_URL || DEF.SUPABASE_URL || '').trim().replace(/\/+$/, '');
+    const SUPABASE_KEY = (CFG.SUPABASE_PUBLISHABLE_KEY || DEF.SUPABASE_PUBLISHABLE_KEY || '').trim();
+    const CONFIG_SOURCE = CFG.SUPABASE_URL ? 'config.js' : 'built-in settings';
+    let configProblem = '';
+
+    const $ = (id) => document.getElementById(id);
+    const authView = $('authView'), appView = $('appView');
+    let supabase = null, currentUser = null;
+
+    function message(id, text, isError=false) {
+      const el=$(id); el.textContent=text; el.classList.remove('hidden','error');
+      if(isError) el.classList.add('error');
+    }
+    function clearMessage(id){ $(id).classList.add('hidden'); }
+    function initials(name='BUDDLY'){ return name.trim().split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase() || 'B'; }
+    function escapeHTML(value=''){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+    function setStatus(t){ $('connection').textContent=t; $('statusText').textContent='Status: '+t; }
+    function isSecretKey(k){
+      if (k.startsWith('sb_secret_')) return true;
+      try { return JSON.parse(atob(k.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))).role === 'service_role'; } catch { return false; }
+    }
+    function explain(e){
+      const m = e?.message || 'Something went wrong.', c = e?.code || '';
+      if (c==='42P01' || c==='PGRST205' || /does not exist|schema cache/i.test(m)) return 'A database table is missing. Run 02_safe_setup.sql in the Supabase SQL Editor. ('+m+')';
+      if (c==='42501' || /row-level security|permission denied/i.test(m)) return 'The database blocked this action (row-level security). Run 02_safe_setup.sql or review your policies. ('+m+')';
+      if (/DataCloneError|postMessage|Failed to fetch|NetworkError|Load failed/i.test(m)) return 'The network request was blocked or failed. If you are viewing this inside a preview window (for example in the Claude app), it cannot reach Supabase. Open the file in Chrome instead. ('+m+')';
+      if (/rate_limit/i.test(m)) return 'You are doing that too fast. Please try again in a little while.';
+      if (/invite required/i.test(m)) return 'Buddly is invite-only right now. Enter a valid invite code.';
+      if (c==='42703' || /column .* does not exist/i.test(m) || /bucket not found/i.test(m)) return 'A new database feature is not set up yet. Run 03_features.sql in the Supabase SQL Editor. ('+m+')';
+      if (/invalid api key|apikey/i.test(m)) return 'Supabase rejected the key. Check config.js. ('+m+')';
+      return m;
+    }
+
+    if (!SUPABASE_URL.startsWith('https://') || !SUPABASE_KEY) {
+      configProblem = 'The Supabase ' + (!SUPABASE_URL.startsWith('https://') ? 'project URL is missing or does not start with https://' : 'publishable key is missing') + '. Tap "Test connection" for details.';
+      setStatus('Not configured');
+      message('authMessage', configProblem, true);
+    } else if (isSecretKey(SUPABASE_KEY)) {
+      configProblem = 'A secret key was found in the settings. Remove it.';
+      setStatus('Unsafe key');
+      message('authMessage', 'config.js contains a SECRET key. Remove it now and use only the publishable key (sb_publishable_...). Rotate the secret key in Supabase.', true);
+    } else {
+      // safeFetch turns Headers objects into plain objects, because some preview windows cannot pass them along.
+      const safeFetch = (input, init = {}) => {
+        const o = { ...init };
+        if (typeof Headers !== 'undefined' && o.headers instanceof Headers) o.headers = Object.fromEntries(o.headers.entries());
+        return fetch(input, o);
+      };
+      supabase = createClient(SUPABASE_URL, SUPABASE_KEY, { global: { fetch: safeFetch } });
+      supabase.from('profiles').select('id', { count: 'exact', head: true }).then(({ error }) => {
+        setStatus(error ? 'Check setup' : 'Connected');
+        if (error) message('authMessage', explain(error), true);
+      });
+    }
+
+    async function runDiagnostics(){
+      const lines=[], ok=t=>lines.push('✅ '+t), bad=t=>lines.push('❌ '+t);
+      lines.push('Page: '+(/^https?:$/.test(location.protocol)?location.origin:'local file on this phone'));
+      lines.push('Settings from: '+CONFIG_SOURCE);
+      if (window.self !== window.top) lines.push('⚠️ This page is inside a preview window, which can block network access. Open it in Chrome instead.');
+      SUPABASE_URL.startsWith('https://') ? ok('Project URL: '+SUPABASE_URL.replace('https://','')) : bad('Project URL missing or invalid');
+      SUPABASE_KEY ? ok('Key type: '+(SUPABASE_KEY.startsWith('sb_publishable_')?'publishable (correct)':SUPABASE_KEY.startsWith('sb_secret_')?'SECRET (remove it!)':'other')) : bad('Key missing');
+      try{ localStorage.setItem('_t','1'); localStorage.removeItem('_t'); ok('Browser storage works, so login will persist'); }
+      catch{ lines.push('⚠️ Browser storage is blocked on this page, so you will need to log in again after a reload. Hosting the app (see instructions) fixes this.'); }
+      if(supabase){
+        try{
+          const r=await fetch(SUPABASE_URL+'/auth/v1/health',{headers:{apikey:SUPABASE_KEY}});
+          r.ok ? ok('Supabase is reachable and accepted the key') : bad('Supabase answered '+r.status+(r.status===401||r.status===403?' (the key was rejected)':''));
+        }catch(e){ bad('Cannot reach Supabase. '+explain(e)); }
+        for(const t of ['profiles','posts','comments','likes','friendships','notifications']){
+          const {error}=await supabase.from(t).select('*',{count:'exact',head:true});
+          error ? bad(t+': '+explain(error)) : ok(t+' table can be read');
+        }
+        lines.push(currentUser ? 'Signed in as '+currentUser.email : 'Not signed in yet. Some tables only show data after you log in.');
+      }
+      message('authMessage',lines.join('\n'), lines.some(l=>l.startsWith('❌')));
+    }
+    $('testBtn').addEventListener('click',()=>{ message('authMessage','Testing…'); runDiagnostics(); });
+    // Diagnostics are for the owner: hidden from visitors unless the address ends with ?debug
+    if (!/[?&]debug\b/.test(location.search)) { $('testBtn').classList.add('hidden'); $('statusText').classList.add('hidden'); }
+
+    const $$ = (q) => document.querySelectorAll(q);
+    try { const iv = new URLSearchParams(location.search).get('invite'); if (iv) $('inviteCode').value = iv.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 20); } catch {}
+    const TERMS_VERSION = '2026-11-21';
+    let view = 'home', filter = 'all', me = null, profileId = null, pendingPhoto = null, pendingVideo = null;
+    const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2, 10));
+    const ago = (t) => { const s=(Date.now()-new Date(t))/1000; return s<60?'now':s<3600?Math.floor(s/60)+'m':s<86400?Math.floor(s/3600)+'h':Math.floor(s/86400)+'d'; };
+    const imgUrl = (p) => supabase.storage.from('post-images').getPublicUrl(p).data.publicUrl;
+    const av = (name, extra='', path='') => `<div class="avatar ${extra}">${path ? `<img alt="" src="${escapeHTML(imgUrl(path))}">` : escapeHTML(initials(name))}</div>`;
+    const isVideo = (p) => /\.(mp4|webm|mov|m4v)$/i.test(p || '');
+    const mediaHTML = (path, name) => isVideo(path) ? `<video class="postvid" controls playsinline muted loop preload="metadata" src="${escapeHTML(imgUrl(path))}#t=0.1"></video>` : `<img class="postimg" loading="lazy" alt="Photo posted by ${escapeHTML(name)}" src="${escapeHTML(imgUrl(path))}">`;
+    const box = (t) => `<div class="card empty">${t}</div>`;
+
+    const PCACHE = {};
+    async function getProfiles(ids) {
+      const m = {}, now = Date.now(); ids = [...new Set(ids)].filter(Boolean); if (!ids.length) return m;
+      const need = [];
+      ids.forEach(id => { const c = PCACHE[id]; if (c && now - c.t < 120000) m[id] = c.v; else need.push(id); });
+      if (need.length) {
+        let r = await supabase.from('profiles').select('id,full_name,username,avatar_path').in('id', need);
+        if (r.error) r = await supabase.from('profiles').select('id,full_name,username').in('id', need);
+        (r.data || []).forEach(p => { m[p.id] = { name: p.full_name || p.username || 'BUDDLY member', username: p.username || '', avatar: p.avatar_path || '' }; PCACHE[p.id] = { t: now, v: m[p.id] }; });
+      }
+      return m;
+    }
+    async function showSession(session) {
+      currentUser = session?.user || null;
+      if (!currentUser) {
+        authView.classList.remove('hidden'); appView.classList.add('hidden'); $('tabs').classList.add('hidden'); $('logoutBtn').classList.add('hidden'); $('meBtn').classList.add('hidden'); return;
+      }
+      authView.classList.add('hidden'); appView.classList.remove('hidden'); $('tabs').classList.remove('hidden'); $('logoutBtn').classList.remove('hidden'); $('meBtn').classList.remove('hidden');
+      let { data: profile, error: pe } = await supabase.from('profiles').select('full_name,username').eq('id', currentUser.id).maybeSingle();
+      if (!profile && !pe) {
+        const m = currentUser.user_metadata || {};
+        const row = { id: currentUser.id, full_name: m.full_name || null, username: (m.username || '').toLowerCase() || null };
+        const { error: ie } = await supabase.from('profiles').upsert(row, { onConflict: 'id' });
+        if (!ie) profile = row;
+      }
+      const name = profile?.full_name || currentUser.user_metadata?.full_name || currentUser.email || 'BUDDLY member';
+      me = { id: currentUser.id, name };
+      $('welcomeName').textContent = name; $('myAvatar').textContent = initials(name);
+      const ar = await supabase.from('profiles').select('avatar_path').eq('id', currentUser.id).maybeSingle(); me.avatar = ar.data?.avatar_path || ''; setMyAvatar();
+      go('home'); updateBadges();
+      if (!window.__poll) window.__poll = setInterval(updateBadges, 30000);
+    }
+    function setMyAvatar() { $('meBtn').innerHTML = me.avatar ? `<img alt="" src="${escapeHTML(imgUrl(me.avatar))}">` : escapeHTML(initials(me.name)); $('myAvatar').innerHTML = me.avatar ? `<img alt="" src="${escapeHTML(imgUrl(me.avatar))}">` : escapeHTML(initials(me.name)); }
+    async function squareJpeg(file, size = 400) {
+      const bmp = await createImageBitmap(file), side = Math.min(bmp.width, bmp.height), c = document.createElement('canvas'); c.width = c.height = size;
+      c.getContext('2d').drawImage(bmp, (bmp.width - side) / 2, (bmp.height - side) / 2, side, side, 0, 0, size, size);
+      return new Promise((res, rej) => c.toBlob(b => b ? res(b) : rej(new Error('Could not process that photo.')), 'image/jpeg', 0.85));
+    }
+    document.addEventListener('change', async (e) => {
+      if (e.target.id !== 'avatarInput' || !currentUser) return;
+      const f = e.target.files[0]; if (!f) return;
+      if (!f.type.startsWith('image/') || f.size > 15 * 1024 * 1024) { alert('Choose an image under 15 MB.'); return; }
+      const old = me.avatar; let path = null;
+      try {
+        path = currentUser.id + '/avatar-' + uid() + '.jpg';
+        const { error: ue } = await supabase.storage.from('post-images').upload(path, await squareJpeg(f), { contentType: 'image/jpeg' }); if (ue) throw ue;
+        const { error } = await supabase.from('profiles').update({ avatar_path: path }).eq('id', currentUser.id);
+        if (error) { await supabase.storage.from('post-images').remove([path]); throw error; }
+        if (old) await supabase.storage.from('post-images').remove([old]);
+        me.avatar = path; delete PCACHE[me.id]; setMyAvatar(); loadProfile(currentUser.id);
+      } catch (err) { alert(err.code === '42703' ? 'One database step is missing. In Supabase > SQL Editor, run: alter table public.profiles add column if not exists avatar_path text;' : explain(err)); }
+    });
+    const msgErr = (e) => (e && (e.code === '42P01' || e.code === '42703' || e.code === 'PGRST205' || /schema cache/.test(e.message || ''))) ? 'Messaging needs a database update. Run the messages SQL in Supabase first.' : explain(e);
+    let chatSig = '';
+    async function loadMsgs(friend) {
+      if (friend) return openChat(friend);
+      const root = $('msgsView'); root.innerHTML = box('Loading…');
+      const [ids, mr] = await Promise.all([friendIds(), supabase.from('messages').select('sender_id,recipient_id,body,image_path,created_at,read_at').order('created_at', { ascending: false }).limit(300)]);
+      if (mr.error) { root.innerHTML = box(escapeHTML(msgErr(mr.error))); return; }
+      const last = {}, unread = {};
+      (mr.data || []).forEach(m => { const o = m.sender_id === me.id ? m.recipient_id : m.sender_id; if (!last[o]) last[o] = m; if (m.recipient_id === me.id && !m.read_at) unread[o] = (unread[o] || 0) + 1; });
+      const all = [...new Set([...ids, ...Object.keys(last)])].sort((a, b) => (last[b]?.created_at || '').localeCompare(last[a]?.created_at || ''));
+      const P = await getProfiles(all);
+      root.innerHTML = '<h3 class="sectiontitle">Messages</h3>' + (all.length ? all.map(id => { const n = P[id]?.name || 'BUDDLY member', l = last[id]; return `<div class="card person" data-act="chat" data-id="${id}" style="cursor:pointer">${av(n, '', P[id]?.avatar)}<div class="meta"><strong>${escapeHTML(n)}</strong><br><span class="muted" style="font-size:13px">${l ? (l.sender_id === me.id ? 'You: ' : '') + escapeHTML(l.body ? l.body.slice(0, 60) : '📷 Photo') : 'Say hi 👋'}</span></div>${unread[id] ? `<b class="bd" style="position:static">${unread[id]}</b>` : ''}</div>`; }).join('') : box('Add a friend first, then you can message them.'));
+    }
+    const THEMES = [['Ocean', '#1877f2', '#5aa9ff'], ['Sunset', '#ff6a3d', '#ffb347'], ['Mint', '#12b886', '#63e6be'], ['Grape', '#7048e8', '#b197fc'], ['Midnight', '#212529', '#6c757d']];
+    const REACTS = ['👍', '❤️', '😂', '😮', '😢', '🔥'];
+    const STICKERS = ['🎉', '🥳', '😂', '😍', '🔥', '👏', '🙌', '💯', '❤️', '😎', '🤗', '🙏'];
+    const QUICK = ['👍', 'Haha 😂', 'On my way 🚶', 'Call me 📞', 'Thanks! 🙏', 'Be right back'];
+    const themeIdx = () => { try { return Math.min(THEMES.length - 1, Math.max(0, +localStorage.getItem('buddly_chat_theme') || 0)); } catch { return 0; } };
+    const themeCss = () => { const t = THEMES[themeIdx()]; return `--b1:${t[1]};--b2:${t[2]}`; };
+    const isBig = (t) => /^\p{Extended_Pictographic}\uFE0F?(\u200D\p{Extended_Pictographic}\uFE0F?)*$/u.test(t || '');
+    const dayLabel = (d) => { const a = new Date(d), n = new Date(), diff = Math.round((new Date(n.getFullYear(), n.getMonth(), n.getDate()) - new Date(a.getFullYear(), a.getMonth(), a.getDate())) / 864e5); return diff === 0 ? 'Today' : diff === 1 ? 'Yesterday' : a.toLocaleDateString([], { month: 'short', day: 'numeric' }); };
+    async function openChat(fid) {
+      const root = $('msgsView'), P = await getProfiles([fid]), n = P[fid]?.name || 'BUDDLY member';
+      window.__chatFid = fid; window.__rbar = null; window.__rx = []; window.__chatData = [];
+      root.innerHTML = `<div class="card chatwrap" style="${themeCss()}"><div class="posthead"><button class="secondary" data-act="tab" data-id="msgs">←</button><span data-act="profile" data-id="${fid}">${av(n, '', P[fid]?.avatar)}</span><div class="meta"><strong>${escapeHTML(n)}</strong></div><button class="secondary" data-act="mtoggle" data-id="themeBar" title="Chat colour">🎨</button></div>
+        <div id="themeBar" class="swatches hidden">${THEMES.map((t, i) => `<button data-act="mtheme" data-id="${i}" title="${t[0]}" style="background:linear-gradient(135deg,${t[1]},${t[2]})"></button>`).join('')}</div>
+        <div id="chatBox" class="chatbox"></div>
+        <div class="qrs">${QUICK.map(q => `<button class="secondary" data-act="qr" data-id="${fid}" data-t="${escapeHTML(q)}">${escapeHTML(q)}</button>`).join('')}</div>
+        <div id="stickerBar" class="stickers hidden">${STICKERS.map(s => `<button data-act="qr" data-id="${fid}" data-t="${s}">${s}</button>`).join('')}</div>
+        <div class="commentbox"><label class="secondary photobtn" style="padding:8px 10px">📷<input id="chatPhoto" type="file" accept="image/*" hidden></label><button class="secondary" data-act="mtoggle" data-id="stickerBar" title="Stickers">😊</button><input id="chatIn" placeholder="Message…" maxlength="2000" autocomplete="off"><button class="primary" data-act="msend" data-id="${fid}">Send</button></div><div id="chatMsg" class="notice hidden"></div></div>`;
+      chatSig = ''; await refreshChat(fid, true);
+      clearInterval(window.__chatPoll); window.__chatPoll = setInterval(() => refreshChat(fid), 4000);
+    }
+    function renderChat(data, rx) {
+      const cb = $('chatBox'); if (!cb) return;
+      const near = cb.scrollHeight - cb.scrollTop - cb.clientHeight < 120; let lastDay = '', lastMine = -1;
+      data.forEach((m, i) => { if (m.sender_id === me.id) lastMine = i; });
+      cb.innerHTML = data.map((m, i) => {
+        let h = ''; const day = dayLabel(m.created_at);
+        if (day !== lastDay) { h += `<div class="daysep">${day}</div>`; lastDay = day; }
+        const mine = m.sender_id === me.id, big = !m.image_path && isBig(m.body), rs = rx.filter(r => r.message_id === m.id), counts = {};
+        rs.forEach(r => { counts[r.emoji] = (counts[r.emoji] || 0) + 1; });
+        const my = rs.find(r => r.user_id === me.id)?.emoji, t = new Date(m.created_at).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        h += `<div class="mrow ${mine ? 'me' : ''}"><div class="bub ${mine ? 'me' : ''} ${big ? 'big' : ''}" data-act="mopen" data-id="${m.id}">${m.image_path ? `<img loading="lazy" alt="Photo" src="${escapeHTML(imgUrl(m.image_path))}">` : ''}${escapeHTML(m.body || '')}<small>${t}</small></div>`;
+        if (Object.keys(counts).length) h += `<div class="rx">${Object.entries(counts).map(([e, c]) => `<span class="${e === my ? 'mine' : ''}">${e}${c > 1 ? ' ' + c : ''}</span>`).join('')}</div>`;
+        if (window.__rbar === m.id) h += `<div class="rbar">${REACTS.map(e => `<button data-act="mreact" data-id="${m.id}" data-e="${e}" class="${e === my ? 'on' : ''}">${e}</button>`).join('')}</div>`;
+        if (mine && i === lastMine) h += `<div class="seen">${m.read_at ? '✓✓ Seen' : '✓ Sent'}</div>`;
+        return h + '</div>';
+      }).join('') || '<p class="muted" style="text-align:center">No messages yet. Say hi 👋</p>';
+      if (near) cb.scrollTop = cb.scrollHeight;
+    }
+    async function refreshChat(fid, force) {
+      const cb = $('chatBox'); if (view !== 'msgs' || !cb) { clearInterval(window.__chatPoll); return; }
+      const { data, error } = await supabase.from('messages').select('id,sender_id,recipient_id,body,image_path,created_at,read_at').or(`and(sender_id.eq.${me.id},recipient_id.eq.${fid}),and(sender_id.eq.${fid},recipient_id.eq.${me.id})`).order('created_at', { ascending: true }).limit(200);
+      if (error) { message('chatMsg', msgErr(error), true); return; }
+      const ids = (data || []).map(m => m.id); let rx = [];
+      if (ids.length) { const r = await supabase.from('message_reactions').select('message_id,user_id,emoji').in('message_id', ids); rx = r.data || []; }
+      const sig = (data || []).map(m => m.id + (m.read_at ? 'r' : '')).join(',') + '|' + rx.map(r => r.message_id + r.user_id + r.emoji).join(',');
+      window.__rx = rx; window.__chatData = data || [];
+      if (force || sig !== chatSig) { chatSig = sig; renderChat(data || [], rx); }
+      if ((data || []).some(m => m.recipient_id === me.id && !m.read_at)) {
+        await supabase.from('messages').update({ read_at: new Date().toISOString() }).eq('recipient_id', me.id).eq('sender_id', fid).is('read_at', null); updateBadges();
+      }
+    }
+    async function sendRaw(fid, body, image) {
+      const { error } = await supabase.from('messages').insert({ sender_id: me.id, recipient_id: fid, body: body || '', image_path: image || null });
+      if (error) { message('chatMsg', error.code === '42501' ? 'You can only message friends.' : msgErr(error), true); return false; }
+      refreshChat(fid, true); return true;
+    }
+    async function sendMsg(fid, b) {
+      const inp = $('chatIn'), t = inp.value.trim(); if (!t) return;
+      b.disabled = true; const ok = await sendRaw(fid, t); b.disabled = false; if (ok) inp.value = '';
+    }
+    async function reactMsg(mid, emoji) {
+      const mine = (window.__rx || []).find(r => r.message_id === mid && r.user_id === me.id); window.__rbar = null;
+      const { error } = await (mine && mine.emoji === emoji ? supabase.from('message_reactions').delete().eq('message_id', mid).eq('user_id', me.id) : supabase.from('message_reactions').upsert({ message_id: mid, user_id: me.id, emoji }, { onConflict: 'message_id,user_id' }));
+      if (error) message('chatMsg', msgErr(error), true);
+      refreshChat(window.__chatFid, true);
+    }
+    document.addEventListener('change', async (e) => {
+      if (e.target.id !== 'chatPhoto') return;
+      const f = e.target.files[0]; e.target.value = ''; if (!f || !f.type.startsWith('image/')) return;
+      try {
+        const path = me.id + '/chat-' + uid() + '.jpg';
+        const { error } = await supabase.storage.from('post-images').upload(path, await compress(f), { contentType: 'image/jpeg' }); if (error) throw error;
+        await sendRaw(window.__chatFid, '', path);
+      } catch (err) { message('chatMsg', explain(err), true); }
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.id === 'chatIn') { e.preventDefault(); document.querySelector('[data-act="msend"]')?.click(); } });
+    const storyErr = (e) => (e && (e.code === '42P01' || e.code === 'PGRST205' || /schema cache/.test(e.message || ''))) ? 'Stories need a database update. Run the stories SQL in Supabase first.' : explain(e);
+    const storyAgo = (d) => { const m = Math.max(1, Math.round((Date.now() - new Date(d)) / 60000)); return m < 60 ? m + 'm' : Math.round(m / 60) + 'h'; };
+    let SV = { list: [], i: 0, t: null, owner: null };
+    async function loadStories() {
+      const row = $('storyRow'); if (!row || !currentUser) return;
+      const add = '<label class="story add" style="cursor:pointer;flex:0 0 105px"><span>＋</span><br>Add story<input id="storyFile" type="file" accept="image/*,video/*" hidden></label>';
+      row.innerHTML = add;
+      const { data, error } = await supabase.from('stories').select('id,user_id,media_path,media_type,caption,created_at').gt('expires_at', new Date().toISOString()).order('created_at', { ascending: true }).limit(200);
+      if (error || !data || !data.length) return;
+      const vr = await supabase.from('story_views').select('story_id').eq('viewer_id', me.id).in('story_id', data.map(s => s.id));
+      const seen = new Set((vr.data || []).map(v => v.story_id)), by = {};
+      data.forEach(s => (by[s.user_id] = by[s.user_id] || []).push(s));
+      const P = await getProfiles(Object.keys(by)); window.__stories = by; window.__seen = seen;
+      const unseen = (u) => by[u].some(s => !seen.has(s.id));
+      const order = Object.keys(by).sort((a, b) => (b === me.id) - (a === me.id) || unseen(b) - unseen(a) || by[b][by[b].length - 1].created_at.localeCompare(by[a][by[a].length - 1].created_at));
+      row.innerHTML = add + order.map(u => {
+        const arr = by[u], s = arr[arr.length - 1], n = u === me.id ? 'Your story' : (P[u]?.name || 'Friend'), url = escapeHTML(imgUrl(s.media_path));
+        return `<div class="story st ${unseen(u) ? 'ring' : ''}" data-act="story" data-id="${u}" style="cursor:pointer">${s.media_type === 'video' ? `<video src="${url}#t=0.1" muted playsinline preload="metadata"></video>` : `<img alt="" loading="lazy" src="${url}">`}<div class="sta">${av(n, '', P[u]?.avatar)}</div><div class="stn">${escapeHTML(n)}</div></div>`;
+      }).join('');
+    }
+    document.addEventListener('change', async (e) => {
+      if (e.target.id !== 'storyFile' || !currentUser) return;
+      const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+      const isV = f.type.startsWith('video/'); if (!isV && !f.type.startsWith('image/')) { alert('Choose a photo or video.'); return; }
+      if (isV && f.size > 30 * 1024 * 1024) { alert('Story videos must be under 30 MB.'); return; }
+      const caption = (prompt('Add a caption (optional)', '') || '').trim().slice(0, 200);
+      const addEl = document.querySelector('#storyRow .add'); if (addEl) addEl.style.opacity = '.5';
+      try {
+        const ext = /webm/.test(f.type) ? 'webm' : /quicktime/.test(f.type) ? 'mov' : 'mp4';
+        const path = me.id + '/story-' + uid() + (isV ? '.' + ext : '.jpg');
+        const { error: ue } = await supabase.storage.from('post-images').upload(path, isV ? f : await compress(f), { contentType: isV ? (f.type || 'video/mp4') : 'image/jpeg' }); if (ue) throw ue;
+        const { error } = await supabase.from('stories').insert({ user_id: me.id, media_path: path, media_type: isV ? 'video' : 'image', caption: caption || null });
+        if (error) { await supabase.storage.from('post-images').remove([path]); throw error; }
+      } catch (err) { alert(storyErr(err)); }
+      loadStories();
+    });
+    function openStory(u) {
+      const arr = (window.__stories || {})[u]; if (!arr) return;
+      const i = Math.max(0, arr.findIndex(s => !window.__seen.has(s.id)));
+      SV = { list: arr, i, t: null, owner: u }; $('storyViewer').classList.remove('hidden'); document.body.style.overflow = 'hidden'; showStory();
+    }
+    async function showStory() {
+      clearTimeout(SV.t); const s = SV.list[SV.i], v = $('storyViewer'), mine = SV.owner === me.id, P = await getProfiles([SV.owner]), n = mine ? 'Your story' : (P[SV.owner]?.name || 'Friend'), url = escapeHTML(imgUrl(s.media_path));
+      v.innerHTML = `<div class="svbars">${SV.list.map((x, k) => `<i class="${k <= SV.i ? 'on' : ''}"></i>`).join('')}</div>
+        <div class="svhead">${av(n, '', P[SV.owner]?.avatar)}<strong>${escapeHTML(n)}</strong><span class="muted" style="color:#ccc">${storyAgo(s.created_at)}</span><span style="flex:1"></span>${mine ? '<button data-act="svviews">👁</button><button data-act="svdel">🗑</button>' : ''}<button data-act="svclose">✕</button></div>
+        <div class="svmedia">${s.media_type === 'video' ? `<video id="svVid" src="${url}" autoplay playsinline></video>` : `<img alt="" src="${url}">`}</div>
+        ${s.caption ? `<div class="svcap">${escapeHTML(s.caption)}</div>` : ''}
+        <div class="svtap l" data-act="svprev"></div><div class="svtap r" data-act="svnext"></div><div id="svViews" class="svviews hidden"></div>`;
+      if (!mine && !window.__seen.has(s.id)) { window.__seen.add(s.id); supabase.from('story_views').upsert({ story_id: s.id, viewer_id: me.id }, { onConflict: 'story_id,viewer_id', ignoreDuplicates: true }); }
+      if (s.media_type === 'video') { const vid = $('svVid'); vid.onended = svNext; vid.play().catch(() => { vid.muted = true; vid.play().catch(() => {}); }); } else SV.t = setTimeout(svNext, 5000);
+    }
+    const svNext = () => { if (SV.i < SV.list.length - 1) { SV.i++; showStory(); } else svClose(); };
+    const svPrev = () => { if (SV.i > 0) SV.i--; showStory(); };
+    function svClose() { clearTimeout(SV.t); $('storyViewer').classList.add('hidden'); $('storyViewer').innerHTML = ''; document.body.style.overflow = ''; loadStories(); }
+    async function svDelete() {
+      if (!confirm('Delete this story?')) return; const s = SV.list[SV.i];
+      const { error } = await supabase.from('stories').delete().eq('id', s.id); if (error) { alert(storyErr(error)); return; }
+      await supabase.storage.from('post-images').remove([s.media_path]);
+      SV.list.splice(SV.i, 1); if (!SV.list.length) return svClose(); SV.i = Math.min(SV.i, SV.list.length - 1); showStory();
+    }
+    async function svViews() {
+      const box2 = $('svViews'); box2.classList.toggle('hidden');
+      if (box2.classList.contains('hidden')) return; clearTimeout(SV.t); box2.textContent = 'Loading…';
+      const { data } = await supabase.from('story_views').select('viewer_id').eq('story_id', SV.list[SV.i].id), P = await getProfiles((data || []).map(r => r.viewer_id));
+      box2.innerHTML = '<strong>Seen by ' + (data || []).length + '</strong>' + (data || []).map(r => `<div style="padding:6px 0">${escapeHTML(P[r.viewer_id]?.name || 'Member')}</div>`).join('');
+    }
+    async function loadVideos() {
+      const root = $('videosView'); root.innerHTML = '<h3 class="sectiontitle">Videos</h3><div id="vidPosts">' + box('Loading videos…') + '</div>';
+      const el = $('vidPosts');
+      const r = await postsQuery(b => b.or('image_path.ilike.*.mp4,image_path.ilike.*.webm,image_path.ilike.*.mov,image_path.ilike.*.m4v').order('created_at', { ascending: false }).limit(20));
+      await renderFeed(el, r);
+      if (!el.querySelector('article')) el.innerHTML = box('No videos yet. Post one from Home with the 🎬 Video button.');
+    }
+    // Autoplay feed videos (muted) while on screen; pause when scrolled away. Skipped on Data Saver.
+    const saveData = !!(navigator.connection && navigator.connection.saveData);
+    const vio = new IntersectionObserver((es) => es.forEach(e => { const v = e.target; if (e.isIntersecting && e.intersectionRatio >= 0.6) { v.play().catch(() => {}); } else if (!v.paused) v.pause(); }), { threshold: [0, 0.6] });
+    const watchVideos = (root) => { if (saveData || !root.querySelectorAll) return; (root.matches && root.matches('video.postvid') ? [root] : [...root.querySelectorAll('video.postvid')]).forEach(v => { if (!v.dataset.w) { v.dataset.w = '1'; vio.observe(v); } }); };
+    new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) watchVideos(n); }))).observe(document.body, { childList: true, subtree: true });
+    function go(v, arg) {
+      clearInterval(window.__chatPoll); view = v;
+      ['home', 'friends', 'msgs', 'videos', 'notif', 'profile', 'settings', 'admin'].forEach(n => $(n + 'View').classList.toggle('hidden', n !== v));
+      const active = v === 'profile' && arg === me.id ? 'me' : v;
+      $$('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.id === active));
+      window.scrollTo(0, 0);
+      if (v === 'home') { loadPosts(); loadStories(); } else if (v === 'friends') loadFriends(); else if (v === 'msgs') loadMsgs(arg); else if (v === 'videos') loadVideos(); else if (v === 'notif') loadNotifs(); else if (v === 'settings') loadSettings(); else if (v === 'admin') loadAdmin(); else loadProfile(arg || me.id);
+    }
+    function setBadge(id, n) { const el = $(id); el.textContent = n > 9 ? '9+' : n; el.classList.toggle('hidden', !n); }
+    async function updateBadges() {
+      if (!currentUser) return;
+      const [n, f, mg] = await Promise.all([
+        supabase.from('notifications').select('id', { count: 'exact', head: true }).is('read_at', null),
+        supabase.from('friendships').select('id', { count: 'exact', head: true })  .eq('addressee_id', currentUser.id).eq('status', 'pending'),
+        supabase.from('messages').select('id', { count: 'exact', head: true }).eq('recipient_id', currentUser.id).is('read_at', null)]);
+      setBadge('bdNotif', n.count || 0); setBadge('bdFriends', f.count || 0); setBadge('bdMsgs', mg.count || 0);
+    }
+
+    $('signupBtn').addEventListener('click', async () => {
+      clearMessage('authMessage');
+      if (!supabase) { message('authMessage', configProblem || 'Connection is not configured.', true); return; }
+      const full_name = $('fullName').value.trim(), username = $('username').value.trim().toLowerCase(), email = $('email').value.trim(), password = $('password').value;
+      if (!full_name || !username || !email || password.length < 8) { message('authMessage', 'Enter your full name, username, email and a password of at least 8 characters.', true); return; }
+      if (!/^[a-z0-9_]{3,20}$/.test(username)) { message('authMessage', 'Username: 3–20 letters, numbers or underscores.', true); return; }
+      if (!$('acceptTerms').checked) { message('authMessage', 'Please confirm you are 16 or older and accept the Terms and Privacy Policy.', true); return; }
+      const invite_code = $('inviteCode').value.trim().toUpperCase();
+      const { data: invOk, error: invErr } = await supabase.rpc('invite_valid', { p_code: invite_code });
+      if (!invErr && !invOk) { message('authMessage', invite_code ? 'That invite code is not valid or has already been used.' : 'Buddly is invite-only right now. Enter your invite code.', true); return; }
+      const redirect = CFG.SITE_URL || (location.protocol.startsWith('http') ? location.origin + location.pathname : undefined);
+      const { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: redirect, data: { full_name, username, invite_code, accepted_terms: 'true', terms_version: TERMS_VERSION } } });
+      if (error) { message('authMessage', explain(error), true); return; }
+      if (data.session) await showSession(data.session);
+      else message('authMessage', 'Account created. Check your email for the confirmation link, then log in. (While testing, you can turn off "Confirm email" in Supabase > Authentication.)');
+    });
+    $('loginBtn').addEventListener('click', async () => {
+      clearMessage('authMessage');
+      if (!supabase) { message('authMessage', configProblem || 'Connection is not configured.', true); return; }
+      const email = $('email').value.trim(), password = $('password').value;
+      if (!email || !password) { message('authMessage', 'Enter your email address and password.', true); return; }
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) { message('authMessage', explain(error), true); return; }
+      await showSession(data.session);
+    });
+    $('logoutBtn').addEventListener('click', async () => {
+      const { error } = await supabase.auth.signOut();
+      if (error) alert(error.message); else await showSession(null);
+    });
+
+    // ---------- posts ----------
+    async function postsQuery(apply) {
+      const cols = 'id,user_id,content,image_path,created_at';
+      let r = await apply(supabase.from('posts').select(cols));
+      if (r.error && r.error.code === '42703') r = await apply(supabase.from('posts').select('id,user_id,content,created_at'));
+      return r;
+    }
+    async function friendIds() {
+      const { data } = await supabase.from('friendships').select('requester_id,addressee_id').eq('status', 'accepted');
+      return (data || []).map(r => r.requester_id === currentUser.id ? r.addressee_id : r.requester_id);
+    }
+    async function loadPosts() {
+      const root = $('posts'); root.innerHTML = box('Loading posts…');
+      const ids = filter === 'friends' ? [currentUser.id, ...await friendIds()] : null;
+      const r = await postsQuery(b => (ids ? b.in('user_id', ids) : b).order('created_at', { ascending: false }).limit(20));
+      await renderFeed(root, r);
+      if (filter === 'all') { if (!root.querySelector('article')) root.innerHTML = ''; if (demoAdded().length < DEMO.length) root.insertAdjacentHTML('beforeend', demoHTML()); }
+    }
+    const DEMO = [
+      { name: 'Maya Chen', t: '2h', text: 'Trying out a new hobby this weekend. Any tips? 🙌' },
+      { name: 'Jordan Ellis', t: '5h', text: 'Coffee, sunshine and a good playlist. Hope everyone has a great Saturday ☀️' },
+      { name: 'Sam Rivera', t: '8h', text: 'Small win today and it made my whole week 😄' },
+      { name: 'Priya Nair', t: '1d', text: 'Just joined Buddly. Say hi and add me! 👋' },
+      { name: 'Leo Martins', t: '1d', text: 'Anyone up for a game this weekend? ⚽' },
+      { name: 'Ava Thompson', t: '2d', text: 'What are you all reading this month? I need recommendations 📚' }
+    ];
+    const DKEY = 'buddly_demo_v1', DSEED = [[12, [['Priya Nair', 'Love this!']]], [4, []], [27, [['Leo Martins', 'Haha same 😂'], ['Ava Thompson', 'Too good']]], [8, []], [3, []], [15, [['Maya Chen', 'Count me in!']]]];
+    const dload = () => { try { return JSON.parse(localStorage.getItem(DKEY)) || {}; } catch { return {}; } };
+    const dsave = (st) => { try { localStorage.setItem(DKEY, JSON.stringify(st)); } catch {} };
+    const dcom = (n, t) => `<div class="comment"><strong>${escapeHTML(n)}</strong>${escapeHTML(t)}</div>`;
+    const demoHTML = () => { const st = dload(); return '<h3 class="sectiontitle" style="margin-top:6px">Suggested for you</h3><p class="muted" style="font-size:12px;margin:-6px 0 10px">Sample posts. Your likes and comments on these are saved on this device only.</p><button class="primary" data-act="dseed" style="width:100%;margin-bottom:10px">Add these to my feed</button><div id="demoMsg" class="notice hidden"></div>' + DEMO.map((d, i) => { const s = st[i] || {}, liked = !!s.liked, n = DSEED[i][0] + (liked ? 1 : 0), cm = [...DSEED[i][1].map(c => dcom(c[0], c[1])), ...(s.c || []).map(c => dcom(c.n, c.t))].join(''); return `<article class="card"><div class="posthead">${av(d.name)}<div class="meta"><strong>${escapeHTML(d.name)}<span class="tag">Sample</span></strong><span class="muted" style="font-size:12px">${d.t}</span></div></div><div class="postbody">${escapeHTML(d.text)}</div>${d.video ? `<video class="postvid" controls playsinline loop preload="auto" src="${d.video}"></video>` : ''}<div class="postactions"><button data-act="dlike" data-id="${i}" class="${liked ? 'liked' : ''}">${likeLabel(liked, n)}</button><button data-act="dcfocus">Comment</button></div><div class="cbox">${cm}</div><div class="commentbox"><input class="cin" placeholder="Write a comment…" maxlength="2000"><button class="secondary" data-act="dcomment" data-id="${i}">Send</button></div></article>`; }).join(''); };
+    const DDONE = 'buddly_demo_added';
+    const demoAdded = () => { try { return JSON.parse(localStorage.getItem(DDONE)) || []; } catch { return []; } };
+    const dBlob = (uri) => { const bin = atob(uri.split(',')[1]), a = new Uint8Array(bin.length); for (let k = 0; k < bin.length; k++) a[k] = bin.charCodeAt(k); return new Blob([a], { type: 'video/mp4' }); };
+    async function demoSeed(btn) {
+      const done = demoAdded(); btn.disabled = true;
+      try {
+        for (const i of [...DEMO.keys()].reverse()) {   // newest-first order matches the sample list
+          if (done.includes(i)) continue;
+          message('demoMsg', 'Adding post ' + (done.length + 1) + ' of ' + DEMO.length + '…');
+          const d = DEMO[i]; let path = null;
+          if (d.video) {
+            path = currentUser.id + '/' + uid() + '.mp4';
+            const { error: ue } = await supabase.storage.from('post-images').upload(path, dBlob(d.video), { contentType: 'video/mp4' });
+            if (ue) throw ue;
+          }
+          const row = { user_id: currentUser.id, content: d.text }; if (path) row.image_path = path;
+          const { error } = await supabase.from('posts').insert(row);
+          if (error) { if (path) await supabase.storage.from('post-images').remove([path]); throw error; }
+          done.push(i); try { localStorage.setItem(DDONE, JSON.stringify(done)); } catch {}
+          await new Promise(r => setTimeout(r, 700));
+        }
+        await loadPosts();
+      } catch (err) { message('demoMsg', explain(err) + ' Tap the button again to continue.', true); btn.disabled = false; }
+    }
+    function demoLike(i, b) { const st = dload(); st[i] = st[i] || {}; st[i].liked = !st[i].liked; dsave(st); b.classList.toggle('liked', st[i].liked); b.textContent = likeLabel(st[i].liked, DSEED[i][0] + (st[i].liked ? 1 : 0)); }
+    function demoComment(i, b) { const card = b.closest('article'), inp = card.querySelector('.cin'), t = inp.value.trim(); if (!t) return; const st = dload(); st[i] = st[i] || {}; (st[i].c = st[i].c || []).push({ n: me.name, t }); dsave(st); card.querySelector('.cbox').insertAdjacentHTML('beforeend', dcom(me.name, t)); inp.value = ''; }
+    const likeLabel = (liked, n) => (liked ? '♥ Liked' : '♡ Like') + (n ? ' · ' + n : '');
+    const commentHTML = (c, P) => `<div class="comment"><strong>${escapeHTML(P[c.user_id]?.name || 'Member')}</strong>${escapeHTML(c.content)}</div>`;
+    async function renderFeed(root, { data: posts, error }) {
+      if (error) { root.innerHTML = box(escapeHTML(explain(error))); return; }
+      if (!posts?.length) { root.innerHTML = box('No posts here yet. Be the first to share something!'); return; }
+      const ids = posts.map(p => p.id);
+      const [lk, cm, P0] = await Promise.all([
+        supabase.from('likes').select('post_id,user_id').in('post_id', ids),
+        supabase.from('comments').select('post_id,user_id,content,created_at').in('post_id', ids).order('created_at', { ascending: true }).limit(500),
+        getProfiles(posts.map(p => p.user_id))]);
+      const count = {}, mine = new Set(), byPost = {};
+      (lk.data || []).forEach(l => { count[l.post_id] = (count[l.post_id] || 0) + 1; if (l.user_id === currentUser.id) mine.add(l.post_id); });
+      (cm.data || []).forEach(c => { (byPost[c.post_id] = byPost[c.post_id] || []).push(c); });
+      const P = { ...P0, ...await getProfiles((cm.data || []).map(c => c.user_id)) };
+      root.innerHTML = '';
+      for (const p of posts) {
+        const name = P[p.user_id]?.name || 'BUDDLY member', liked = mine.has(p.id), n = count[p.id] || 0, isMine = p.user_id === currentUser.id;
+        const text = p.image_path && (p.content === '📷' || p.content === '🎬') ? '' : p.content || '';
+        const card = document.createElement('article'); card.className = 'card';
+        card.innerHTML = `<div class="posthead">${av(name, '', P[p.user_id]?.avatar)}<div class="meta"><strong class="lnk" data-act="profile" data-id="${p.user_id}">${escapeHTML(name)}</strong><span class="muted" style="font-size:12px">${ago(p.created_at)}</span></div>${isMine ? `<button class="secondary" data-act="delpost" data-id="${p.id}" data-img="${escapeHTML(p.image_path || '')}" aria-label="Delete post">✕</button>` : `<button class="secondary" data-act="safety" data-t="post" data-id="${p.id}" data-u="${p.user_id}" aria-label="More options">⋯</button>`}</div>${text ? `<div class="postbody">${escapeHTML(text)}</div>` : ''}${p.image_path ? mediaHTML(p.image_path, name) : ''}<div class="postactions"><button data-act="like" data-id="${p.id}" data-liked="${liked}" data-count="${n}" class="${liked ? 'liked' : ''}">${likeLabel(liked, n)}</button><button data-act="cfocus">Comment</button></div><div class="cbox">${(byPost[p.id] || []).map(c => commentHTML(c, P)).join('')}</div><div class="commentbox"><input class="cin" placeholder="Write a comment…" maxlength="2000"><button class="secondary" data-act="comment" data-id="${p.id}">Send</button></div>`;
+        root.appendChild(card);
+      }
+    }
+    async function toggleLike(postId, button) {
+      const was = button.dataset.liked === 'true'; let n = Number(button.dataset.count) || 0; button.disabled = true;
+      const { error } = was
+        ? await supabase.from('likes').delete().eq('post_id', postId).eq('user_id', currentUser.id)
+        : await supabase.from('likes').insert({ post_id: postId, user_id: currentUser.id });
+      button.disabled = false;
+      if (error && error.code !== '23505') { alert(explain(error)); return; }
+      const liked = !was; n = Math.max(0, n + (liked ? 1 : -1));
+      button.dataset.liked = String(liked); button.dataset.count = String(n);
+      button.classList.toggle('liked', liked); button.textContent = likeLabel(liked, n);
+    }
+    async function addComment(postId, btn) {
+      const card = btn.closest('article'), input = card.querySelector('.cin'), content = input.value.trim(); if (!content) return;
+      const { error } = await supabase.from('comments').insert({ post_id: postId, user_id: currentUser.id, content });
+      if (error) { alert(explain(error)); return; }
+      input.value = '';
+      const { data } = await supabase.from('comments').select('user_id,content,created_at').eq('post_id', postId).order('created_at', { ascending: true }).limit(50);
+      const P = await getProfiles((data || []).map(c => c.user_id));
+      card.querySelector('.cbox').innerHTML = (data || []).map(c => commentHTML(c, P)).join('');
+    }
+    async function deletePost(id, img) {
+      if (!confirm('Delete this post?')) return;
+      const { error } = await supabase.from('posts').delete().eq('id', id);
+      if (error) { alert(explain(error)); return; }
+      if (img) await supabase.storage.from('post-images').remove([img]);
+      view === 'profile' ? loadProfile(profileId) : view === 'videos' ? loadVideos() : loadPosts();
+    }
+
+    // ---------- friends ----------
+    async function myFriendships() {
+      const { data, error } = await supabase.from('friendships').select('id,requester_id,addressee_id,status');
+      return { rows: data || [], error };
+    }
+    const other = (r) => r.requester_id === currentUser.id ? r.addressee_id : r.requester_id;
+    function personRow(id, P, sub, buttons) {
+      const n = P[id]?.name || 'BUDDLY member';
+      return `<div class="card person"><span data-act="profile" data-id="${id}">${av(n, '', P[id]?.avatar)}</span><div class="meta" data-act="profile" data-id="${id}"><strong>${escapeHTML(n)}</strong><br><span class="muted" style="font-size:13px">${escapeHTML(sub)}</span></div>${buttons}</div>`;
+    }
+    async function loadFriends() {
+      const root = $('friendsView'); root.innerHTML = box('Loading…');
+      const { rows, error } = await myFriendships();
+      if (error) { root.innerHTML = box(escapeHTML(explain(error))); return; }
+      const { data: all } = await supabase.from('profiles').select('id').neq('id', currentUser.id).limit(40);
+      const P = await getProfiles([...rows.map(other), ...(all || []).map(p => p.id)]);
+      const incoming = rows.filter(r => r.status === 'pending' && r.addressee_id === currentUser.id);
+      const sent = rows.filter(r => r.status === 'pending' && r.requester_id === currentUser.id);
+      const friends = rows.filter(r => r.status === 'accepted'), taken = new Set(rows.map(other));
+      const sugg = (all || []).filter(p => !taken.has(p.id));
+      const sec = (t, list, empty) => `<h3 class="sectiontitle">${t}</h3>` + (list.join('') || box(empty));
+      root.innerHTML =
+        sec(`Friend requests (${incoming.length})`, incoming.map(r => personRow(other(r), P, 'wants to be friends', `<button class="primary" data-act="facc" data-id="${r.id}">Confirm</button><button class="secondary" data-act="frej" data-id="${r.id}">Delete</button>`)), 'No new requests.') +
+        sec('People you may know', sugg.map(p => personRow(p.id, P, '@' + (P[p.id]?.username || ''), `<button class="primary" data-act="fadd" data-id="${p.id}">Add friend</button>`)), 'No one else has joined yet. Invite a friend!') +
+        (sent.length ? sec('Sent requests', sent.map(r => personRow(other(r), P, 'request sent', `<button class="secondary" data-act="frej" data-id="${r.id}">Cancel</button>`)), '') : '') +
+        sec(`Your friends (${friends.length})`, friends.map(r => personRow(other(r), P, '@' + (P[other(r)]?.username || ''), `<button class="primary" data-act="chat" data-id="${other(r)}">Message</button><button class="secondary" data-act="frej" data-id="${r.id}" data-confirm="Remove this friend?">Unfriend</button>`)), 'No friends yet.');
+    }
+    async function friendAction(a, id, b) {
+      if (b.dataset.confirm && !confirm(b.dataset.confirm)) return;
+      b.disabled = true; let r;
+      if (a === 'fadd') r = await supabase.from('friendships').insert({ requester_id: currentUser.id, addressee_id: id });
+      else if (a === 'facc') r = await supabase.from('friendships').update({ status: 'accepted' }).eq('id', id);
+      else r = await supabase.from('friendships').delete().eq('id', id);
+      if (r.error && r.error.code !== '23505') { alert(explain(r.error)); b.disabled = false; return; }
+      view === 'profile' ? loadProfile(profileId) : loadFriends(); updateBadges();
+    }
+
+    // ---------- notifications ----------
+    async function loadNotifs() {
+      const root = $('notifView'); root.innerHTML = box('Loading…');
+      const { data, error } = await supabase.from('notifications').select('id,actor_id,type,created_at,read_at').order('created_at', { ascending: false }).limit(40);
+      if (error) { root.innerHTML = box(escapeHTML(explain(error))); return; }
+      if (!data.length) { root.innerHTML = '<h3 class="sectiontitle">Notifications</h3>' + box('Nothing yet. Likes, comments and friend requests show up here.'); return; }
+      const P = await getProfiles(data.map(n => n.actor_id));
+      const T = { like: 'liked your post', comment: 'commented on your post', friend_request: 'sent you a friend request', friend_accept: 'accepted your friend request' };
+      root.innerHTML = '<h3 class="sectiontitle">Notifications</h3>' + data.map(n => {
+        const name = P[n.actor_id]?.name || 'Someone';
+        return `<div class="card person ${n.read_at ? '' : 'unread'}" data-act="profile" data-id="${n.actor_id}">${av(name, '', P[n.actor_id]?.avatar)}<div class="meta"><strong>${escapeHTML(name)}</strong> ${T[n.type] || 'did something'}<br><span class="muted" style="font-size:12px">${ago(n.created_at)}</span></div></div>`;
+      }).join('');
+      if (data.some(n => !n.read_at)) { await supabase.from('notifications').update({ read_at: new Date().toISOString() }).is('read_at', null); updateBadges(); }
+    }
+
+    // ---------- profile ----------
+    async function loadProfile(id) {
+      profileId = id; const root = $('profileView'); root.innerHTML = box('Loading…');
+      let pr = await supabase.from('profiles').select('id,full_name,username,bio,avatar_path').eq('id', id).maybeSingle();
+      if (pr.error && pr.error.code === '42703') pr = await supabase.from('profiles').select('id,full_name,username,bio').eq('id', id).maybeSingle();
+      if (pr.error && pr.error.code === '42703') pr = await supabase.from('profiles').select('id,full_name,username').eq('id', id).maybeSingle();
+      if (!pr.data) { root.innerHTML = box(escapeHTML(pr.error ? explain(pr.error) : 'Profile not found.')); return; }
+      const p = pr.data, name = p.full_name || p.username || 'BUDDLY member', mineP = id === currentUser.id;
+      const { rows } = await myFriendships();
+      const row = rows.find(r => other(r) === id), nFriends = rows.filter(r => r.status === 'accepted').length;
+      let btn = '';
+      if (mineP) btn = '<label class="secondary photobtn">📷 Change photo<input id="avatarInput" type="file" accept="image/*" hidden></label><button class="secondary" data-act="editbio">Edit bio</button><button class="secondary" data-act="tab" data-id="settings">Settings</button>';
+      else if (!row) btn = `<button class="primary" data-act="fadd" data-id="${id}">Add friend</button>`;
+      else if (row.status === 'accepted') btn = `<button class="primary" data-act="chat" data-id="${profileId}">Message</button><button class="secondary" data-act="frej" data-id="${row.id}" data-confirm="Remove this friend?">Friends ✓</button>`;
+      else if (row.requester_id === currentUser.id) btn = `<button class="secondary" data-act="frej" data-id="${row.id}">Cancel request</button>`;
+      else btn = `<button class="primary" data-act="facc" data-id="${row.id}">Confirm</button><button class="secondary" data-act="frej" data-id="${row.id}">Delete</button>`;
+      if (!mineP) btn += `<button class="secondary" data-act="safety" data-t="profile" data-id="${id}" data-u="${id}" aria-label="More options">⋯</button>`;
+      root.innerHTML = `<div class="card" style="padding:0;overflow:hidden"><div class="cover"></div><div class="pinfo">${av(name, 'big', p.avatar_path)}<h2 style="margin:8px 0 2px">${escapeHTML(name)}</h2><div class="muted">@${escapeHTML(p.username || '')}${mineP ? ' · ' + nFriends + ' friends' : ''}</div>${p.bio ? `<p style="margin:10px 0">${escapeHTML(p.bio)}</p>` : ''}<div style="display:flex;gap:8px;margin-top:12px">${btn}</div></div></div><h3 class="sectiontitle">Posts</h3><div id="profilePosts"></div>`;
+      await renderFeed($('profilePosts'), await postsQuery(b => b.eq('user_id', id).order('created_at', { ascending: false }).limit(30)));
+    }
+    async function editBio() {
+      const bio = prompt('Write a short bio (up to 160 characters)'); if (bio === null) return;
+      const { error } = await supabase.from('profiles').update({ bio: bio.trim().slice(0, 160) }).eq('id', currentUser.id);
+      if (error) alert(explain(error)); else loadProfile(currentUser.id);
+    }
+
+    // ---------- composer with photo ----------
+    async function compress(file) {
+      const bmp = await createImageBitmap(file), k = Math.min(1, 1080 / Math.max(bmp.width, bmp.height));
+      const c = document.createElement('canvas'); c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+      c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);   // re-encoding also removes hidden photo data such as GPS location
+      return new Promise((res, rej) => c.toBlob(b => b ? res(b) : rej(new Error('Could not process that photo.')), 'image/jpeg', 0.82));
+    }
+    $('photoInput').addEventListener('change', (e) => {
+      const f = e.target.files[0]; if (!f) return;
+      if (!f.type.startsWith('image/')) { message('postMessage', 'Choose an image file.', true); return; }
+      if (f.size > 15 * 1024 * 1024) { message('postMessage', 'That photo is over 15 MB. Choose a smaller one.', true); return; }
+      pendingVideo = null; $('vpreview').classList.add('hidden'); $('vpreview').removeAttribute('src'); pendingPhoto = f; $('photoName').textContent = f.name; const pv = $('preview'); pv.src = URL.createObjectURL(f); pv.classList.remove('hidden'); clearMessage('postMessage');
+    });
+    $('videoInput').addEventListener('change', (e) => {
+      const f = e.target.files[0]; if (!f) return;
+      if (!f.type.startsWith('video/')) { message('postMessage', 'Choose a video file.', true); return; }
+      if (f.size > 50 * 1024 * 1024) { message('postMessage', 'That video is over 50 MB. Choose a shorter one.', true); return; }
+      pendingPhoto = null; $('photoInput').value = ''; $('preview').classList.add('hidden');
+      pendingVideo = f; $('photoName').textContent = f.name; const v = $('vpreview'); v.src = URL.createObjectURL(f); v.classList.remove('hidden'); clearMessage('postMessage');
+    });
+    $('publishBtn').addEventListener('click', async () => {
+      const content = $('postText').value.trim();
+      if (!content && !pendingPhoto && !pendingVideo) { message('postMessage', 'Write something or add a photo first.', true); return; }
+      const btn = $('publishBtn'); btn.disabled = true; let path = null;
+      try {
+        if (pendingPhoto) {
+          const blob = await compress(pendingPhoto); path = currentUser.id + '/' + uid() + '.jpg';
+          const { error: ue } = await supabase.storage.from('post-images').upload(path, blob, { contentType: 'image/jpeg' });
+          if (ue) throw ue;
+        }
+        if (pendingVideo) {
+          const ext = /webm/.test(pendingVideo.type) ? 'webm' : /quicktime/.test(pendingVideo.type) ? 'mov' : 'mp4';
+          path = currentUser.id + '/' + uid() + '.' + ext;
+          const { error: ve } = await supabase.storage.from('post-images').upload(path, pendingVideo, { contentType: pendingVideo.type || 'video/mp4' });
+          if (ve) throw ve;
+        }
+        const row = { user_id: currentUser.id, content: content || (pendingVideo ? '🎬' : '📷') }; if (path) row.image_path = path;
+        const { error } = await supabase.from('posts').insert(row);
+        if (error) { if (path) await supabase.storage.from('post-images').remove([path]); throw error; }
+        $('postText').value = ''; pendingVideo = null; $('videoInput').value = ''; $('vpreview').classList.add('hidden'); $('vpreview').removeAttribute('src'); pendingPhoto = null; $('photoInput').value = ''; $('photoName').textContent = ''; $('preview').classList.add('hidden'); clearMessage('postMessage');
+        await loadPosts();
+      } catch (err) { message('postMessage', explain(err), true); }
+      finally { btn.disabled = false; }
+    });
+    const setFilter = (f) => { filter = f; $('fAll').classList.toggle('on', f === 'all'); $('fFriends').classList.toggle('on', f === 'friends'); loadPosts(); };
+    $('fAll').addEventListener('click', () => setFilter('all'));
+    $('fFriends').addEventListener('click', () => setFilter('friends'));
+
+
+    // ---------- safety: report, block ----------
+    const REASONS = [['spam', 'Spam or scam'], ['harassment', 'Harassment or bullying'], ['nudity', 'Nudity or sexual content'], ['violence', 'Violence or threats'], ['other', 'Something else']];
+    const openLayer = (html) => { $('layer').innerHTML = `<div class="sheetbg" data-act="closelayer"><div>${html}</div></div>`; };
+    const closeLayer = () => { $('layer').innerHTML = ''; };
+    function safetySheet(t, id, u) {
+      openLayer(`<h3 style="margin-top:0">Options</h3><button class="secondary" style="width:100%;margin-bottom:8px" data-act="reportform" data-t="${t}" data-id="${id}">🚩 Report this ${t}</button><button class="secondary" style="width:100%;color:#c62828" data-act="blockuser" data-id="${u}">🚫 Block this person</button><button class="secondary" style="width:100%;margin-top:8px" data-act="closelayer">Cancel</button>`);
+    }
+    function reportForm(t, id) {
+      openLayer(`<h3 style="margin-top:0">Why are you reporting this?</h3>${REASONS.map(([v, l], i) => `<label class="lrow"><input type="radio" name="rr" value="${v}" ${i ? '' : 'checked'}> ${l}</label>`).join('')}<p id="rmsg" class="muted"></p><div style="display:flex;gap:8px"><button class="primary" data-act="sendreport" data-t="${t}" data-id="${id}">Send report</button><button class="secondary" data-act="closelayer">Cancel</button></div>`);
+    }
+    async function sendReport(t, id) {
+      const r = document.querySelector('input[name="rr"]:checked');
+      const { error } = await supabase.rpc('report_content', { p_type: t, p_id: id, p_reason: r ? r.value : 'other' });
+      if (error) { $('rmsg').textContent = /own content/.test(error.message) ? 'You can’t report your own content.' : explain(error); return; }
+      openLayer('<h3 style="margin-top:0">Report sent</h3><p>Thanks. Our team will review it. You can also block this person.</p><button class="primary" data-act="closelayer">Done</button>');
+    }
+    async function blockUser(u) {
+      if (!confirm('Block this person? You will not see each other’s posts or profiles.')) return;
+      const { error } = await supabase.from('blocks').insert({ blocker_id: currentUser.id, blocked_id: u });
+      if (error && error.code !== '23505') { alert(explain(error)); return; }
+      closeLayer(); go('home'); updateBadges();
+    }
+
+    // ---------- settings, data export, account deletion ----------
+    async function loadSettings() {
+      const root = $('settingsView'); root.innerHTML = box('Loading…');
+      const [b, st] = await Promise.all([supabase.rpc('my_blocked'), supabase.rpc('is_staff')]);
+      const blocked = b.data || [];
+      root.innerHTML = `<h3 class="sectiontitle">Settings</h3>
+        <div class="card"><h3 style="margin-top:0">Blocked accounts</h3>${blocked.map(x => `<div class="lrow"><span style="flex:1">${escapeHTML(x.name || 'Member')}</span><button class="secondary" data-act="unblock" data-id="${x.id}">Unblock</button></div>`).join('') || '<span class="muted">You haven’t blocked anyone.</span>'}</div>
+        <div class="card"><h3 style="margin-top:0">Your data</h3><button class="secondary" data-act="export">Download my data</button><p style="margin-bottom:0"><a href="#" data-act="legal" data-id="privacy">Privacy Policy</a> · <a href="#" data-act="legal" data-id="terms">Terms</a></p></div>
+        ${st.data === true ? '<div class="card"><button class="primary" data-act="tab" data-id="admin">Moderation</button></div>' : ''}
+        <div class="card" style="border:1px solid #e53935"><h3 style="margin-top:0;color:#c62828">Delete account</h3><p class="muted">Permanently erases your profile, posts, comments and photos.</p><button class="secondary" data-act="delform">Delete my account…</button></div>`;
+    }
+    async function exportData() {
+      const get = async (t) => (await supabase.from(t).select('*')).data || [];
+      const [profiles, posts, comments, likes, friendships, blocks] = await Promise.all(['profiles', 'posts', 'comments', 'likes', 'friendships', 'blocks'].map(get));
+      const id = currentUser.id, mine = (r, k) => r.filter(x => x[k] === id);
+      const data = { exported_at: new Date().toISOString(), email: currentUser.email, profile: profiles.find(p => p.id === id) || null, posts: mine(posts, 'user_id'), comments: mine(comments, 'user_id'), likes: mine(likes, 'user_id'), friendships, blocked: blocks };
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
+      a.download = 'buddly-my-data.json'; document.body.appendChild(a); a.click(); a.remove();
+    }
+    function deleteForm() {
+      openLayer(`<h3 style="margin-top:0;color:#c62828">Delete account</h3><p>This permanently erases your profile, posts, comments and photos. It can’t be undone.</p><input id="dpw" type="password" placeholder="Your password" autocomplete="current-password"><input id="dtx" placeholder="Type DELETE to confirm" autocapitalize="characters"><p id="dmsg" class="muted"></p><div style="display:flex;gap:8px"><button class="primary" style="background:#c62828" data-act="dodelete">Permanently delete</button><button class="secondary" data-act="closelayer">Cancel</button></div>`);
+    }
+    async function doDelete() {
+      if ($('dtx').value.trim() !== 'DELETE') { $('dmsg').textContent = 'Type DELETE to confirm.'; return; }
+      const { error: ae } = await supabase.auth.signInWithPassword({ email: currentUser.email, password: $('dpw').value });
+      if (ae) { $('dmsg').textContent = 'That password is incorrect.'; return; }
+      for (let i = 0; i < 50; i++) {   // remove the person's photo files first
+        const { data: files } = await supabase.storage.from('post-images').list(currentUser.id, { limit: 100 });
+        if (!files || !files.length) break;
+        const { error } = await supabase.storage.from('post-images').remove(files.map(f => currentUser.id + '/' + f.name));
+        if (error) { $('dmsg').textContent = 'Could not remove your photos. Try again.'; return; }
+      }
+      const { error } = await supabase.rpc('delete_my_account');
+      if (error) { $('dmsg').textContent = /last_admin/.test(error.message) ? 'You are the only admin. Make someone else an admin first.' : explain(error); return; }
+      await supabase.auth.signOut(); closeLayer(); await showSession(null); message('authMessage', 'Your account has been deleted.');
+    }
+
+    // ---------- moderation (staff only; the database re-checks every call) ----------
+    async function loadAdmin() {
+      const root = $('adminView'); root.innerHTML = box('Loading…');
+      const st = await supabase.rpc('is_staff'); if (st.data !== true) { root.innerHTML = box('Not available.'); return; }
+      let { data: reports, error } = await supabase.rpc('mod_reports');
+      if (error) reports = [];
+      const isAdmin = (await supabase.rpc('is_admin')).data === true;
+      const inv = isAdmin ? ((await supabase.rpc('admin_invites')).data || []) : [];
+      const btn = 'style="margin:2px"';
+      let h = (error ? '<div class=card>Reports are not set up yet, so none are shown. Invites below still work.</div>' : '') + `<h3 class="sectiontitle">Reports (${(reports || []).length})</h3>` + ((reports || []).map(r => `<div class="card"><div class="muted" style="font-size:13px">${escapeHTML(r.target_type)} reported by @${escapeHTML(r.reporter_name || '?')} · ${ago(r.created_at)}</div><p><b>Reason:</b> ${escapeHTML(r.reason)}</p>${r.snapshot ? `<p style="background:var(--soft);padding:8px;border-radius:8px">${escapeHTML(r.snapshot)}</p>` : ''}${r.image_path ? `<img class="postimg" alt="Reported photo" src="${escapeHTML(imgUrl(r.image_path))}">` : ''}<p class="muted">By @${escapeHTML(r.author_name || '?')}</p><button class="secondary" ${btn} data-act="modres" data-id="${r.id}" data-a="dismiss">Dismiss</button>${r.target_type !== 'profile' ? `<button class="primary" ${btn} data-act="modres" data-id="${r.id}" data-a="remove" data-confirm="Remove this content?">Remove content</button>` : ''}<button class="primary" style="background:#c62828;margin:2px" data-act="modres" data-id="${r.id}" data-a="suspend" data-confirm="Suspend this person? They will not be able to post, comment, like or add friends.">Suspend author</button></div>`).join('') || box('No open reports. Nice and quiet.'));
+      if (isAdmin) h += `<h3 class="sectiontitle">Invites</h3><div class="card"><input id="invNote" placeholder="Who is it for? (optional)" maxlength="100"><div style="display:flex;gap:8px"><select id="invUses"><option value="1">1 person</option><option value="5">5 people</option><option value="20">20 people</option></select><select id="invDays"><option value="7">7 days</option><option value="14" selected>14 days</option><option value="30">30 days</option></select></div><button class="primary" style="margin-top:8px" data-act="mkinvite">Create invite link</button></div>` + inv.map(i => `<div class="card person"><div class="meta"><strong style="letter-spacing:1px">${escapeHTML(i.code)}</strong><br><span class="muted" style="font-size:13px">${escapeHTML(i.note || 'No note')} · ${i.uses}/${i.max_uses} used</span></div></div>`).join('');
+      root.innerHTML = h;
+    }
+    async function modResolve(id, action, btn) {
+      if (btn.dataset.confirm && !confirm(btn.dataset.confirm)) return;
+      const { error } = await supabase.rpc('mod_resolve', { p_id: id, p_action: action, p_note: '' });
+      if (error) { alert(explain(error)); return; } loadAdmin();
+    }
+    async function makeInvite() {
+      const { data, error } = await supabase.rpc('create_invite', { p_note: $('invNote').value.trim(), p_max_uses: Number($('invUses').value), p_days: Number($('invDays').value) });
+      if (error) { alert(explain(error)); return; }
+      prompt('Invite link (copy it and send it):', location.origin + location.pathname + '?invite=' + data); loadAdmin();
+    }
+
+    // ---------- legal pages (drafts: have a lawyer review before public launch) ----------
+    function showLegal(which) {
+      const co = escapeHTML(DEF.COMPANY || '[Company legal name]'), em = escapeHTML(DEF.CONTACT_EMAIL || '[contact email]');
+      const terms = `<h1>Terms of Service</h1><p class="muted">Version ${TERMS_VERSION}</p><p>These terms are an agreement between you and ${co} about using Buddly. By creating an account you accept them.</p>
+        <h2>1. Who can use Buddly</h2><p>You must be at least 16 years old, give accurate sign-up details, and keep your password safe. You are responsible for what happens on your account.</p>
+        <h2>2. Early version</h2><p>Buddly is an early development version. Features may change or break, and data may be reset.</p>
+        <h2>3. Your content</h2><p>You own what you post. You allow us to store and show it to the people you share it with so the service can work. You promise you have the right to post it.</p>
+        <h2>4. Rules</h2><ul><li>No illegal content, and no sexual content involving minors (we report this to the authorities).</li><li>No harassment, hate, threats, or encouragement of violence or self-harm.</li><li>No sexual or graphic violent content.</li><li>No spam, scams, fake accounts or impersonation.</li><li>No one else’s private information, and no content that infringes others’ rights.</li><li>No attempts to break or get around the security of the service.</li></ul>
+        <h2>5. Reports and enforcement</h2><p>You can report content and block people. We may remove content, limit features, or suspend accounts that break these rules or put others at risk.</p>
+        <h2>6. Ending your account</h2><p>You can delete your account at any time in Settings.</p>
+        <h2>7. Our responsibility</h2><p>We provide Buddly “as is” during development. [Lawyer: add limitation-of-liability wording suited to your jurisdictions and consumer law.]</p>
+        <h2>8. Changes, law and contact</h2><p>We may update these terms and will tell you about important changes. They are governed by the laws of [jurisdiction], without removing consumer rights you have where you live. Questions: ${em}</p>`;
+      const privacy = `<h1>Privacy Policy</h1><p class="muted">Version ${TERMS_VERSION}</p><p>${co} runs Buddly. This page explains what we collect and the control you have. We collect only what the app needs, we don’t sell your data, and we use no advertising trackers.</p>
+        <h2>What we collect</h2><ul><li><b>Account:</b> email address, password (stored only in scrambled form by our login provider), name, username, bio.</li><li><b>What you create:</b> posts, photos, comments, likes, friends, blocks, and reports you send.</li><li><b>Notifications:</b> a record of likes, comments and friend requests addressed to you.</li><li><b>Consent:</b> when you accepted our Terms, and which version.</li></ul><p>Photos are re-encoded on your device before upload, which removes hidden data such as GPS location.</p>
+        <h2>Why we use it</h2><p>To run your account, show your posts to the people you choose, send you notifications, keep the community safe (reports, blocking, moderation) and keep the service secure.</p>
+        <h2>Who sees it</h2><p>Posts and profiles are visible to other signed-in members. Blocks and reports are private. Our moderators can see reported content.</p>
+        <h2>Companies that help us run Buddly</h2><ul><li><b>Supabase:</b> database, logins and photo storage.</li><li><b>GitHub:</b> hosting of this web page.</li></ul><p>[Lawyer: confirm legal bases, data region and international transfer wording.]</p>
+        <h2>Cookies and storage</h2><p>We store only what keeps you logged in. No advertising or tracking cookies.</p>
+        <h2>How long we keep it</h2><p>While your account exists. Deleting a post erases it and its photo immediately. Deleting your account erases your profile, posts, comments, likes, friends and photos immediately. Reports and a copy of reported content may be kept for safety review for up to [period]. Backups, if any, may take up to [backup period] to expire.</p>
+        <h2>Your choices</h2><ul><li><b>See and download your data:</b> Settings, then “Download my data”.</li><li><b>Correct it:</b> edit your bio any time.</li><li><b>Delete it:</b> Settings, then “Delete my account”.</li><li><b>Object or complain:</b> email ${em}, or contact your local data protection authority.</li></ul>
+        <h2>Age</h2><p>Buddly is for people aged 16 and over.</p><h2>Contact</h2><p>${em}</p>`;
+      openLayer(`<div class="legal"><div class="draft"><b>Draft for the early version.</b> Have a qualified lawyer review and complete this text (including the bracketed items) before public launch.</div>${which === 'terms' ? terms : privacy}<button class="primary" style="margin-top:14px" data-act="closelayer">Close</button></div>`);
+    }
+    document.addEventListener('click', (e) => { const l = e.target.closest('[data-act="legal"]'); if (l) { e.preventDefault(); showLegal(l.dataset.id); } });
+
+    document.addEventListener('click', async (e) => {
+      const b = e.target.closest('[data-act]'); if (!b || !supabase || !currentUser) return;
+      const a = b.dataset.act, id = b.dataset.id;
+      if (a === 'tab') return id === 'me' ? go('profile', me.id) : go(id);
+      if (a === 'profile') return go('profile', id);
+      if (a === 'story') return openStory(id);
+      if (a === 'svnext') return svNext();
+      if (a === 'svprev') return svPrev();
+      if (a === 'svclose') return svClose();
+      if (a === 'svdel') return svDelete();
+      if (a === 'svviews') return svViews();
+      if (a === 'chat') return go('msgs', id);
+      if (a === 'qr') return sendRaw(id, b.dataset.t);
+      if (a === 'mtoggle') return $(id).classList.toggle('hidden');
+      if (a === 'mtheme') { try { localStorage.setItem('buddly_chat_theme', id); } catch {} document.querySelector('.chatwrap').style.cssText = themeCss(); return; }
+      if (a === 'mopen') { window.__rbar = window.__rbar === id ? null : id; return renderChat(window.__chatData || [], window.__rx || []); }
+      if (a === 'mreact') return reactMsg(id, b.dataset.e);
+      if (a === 'msend') return sendMsg(id, b);
+      if (a === 'dseed') return demoSeed(b);
+      if (a === 'dlike') return demoLike(id, b);
+      if (a === 'dcomment') return demoComment(id, b);
+      if (a === 'dcfocus') return b.closest('article').querySelector('.cin').focus();
+      if (a === 'like') return toggleLike(id, b);
+      if (a === 'comment') return addComment(id, b);
+      if (a === 'cfocus') return b.closest('article').querySelector('.cin').focus();
+      if (a === 'delpost') return deletePost(id, b.dataset.img);
+      if (a === 'fadd' || a === 'facc' || a === 'frej') return friendAction(a, id, b);
+      if (a === 'editbio') return editBio();
+      if (a === 'safety') return safetySheet(b.dataset.t, id, b.dataset.u);
+      if (a === 'reportform') return reportForm(b.dataset.t, id);
+      if (a === 'sendreport') return sendReport(b.dataset.t, id);
+      if (a === 'blockuser') return blockUser(id);
+      if (a === 'unblock') { await supabase.from('blocks').delete().eq('blocker_id', currentUser.id).eq('blocked_id', id); return loadSettings(); }
+      if (a === 'closelayer') { if (b.classList.contains('sheetbg') && e.target !== b) return; return closeLayer(); }
+      if (a === 'export') return exportData();
+      if (a === 'delform') return deleteForm();
+      if (a === 'dodelete') return doDelete();
+      if (a === 'modres') return modResolve(id, b.dataset.a, b);
+      if (a === 'mkinvite') return makeInvite();
+    });
+
+    if (supabase) {
+      const { data: { session } } = await supabase.auth.getSession();
+      await showSession(session);
+      // Only react to sign-out here; sign-in is handled by the buttons above (avoids duplicate loads).
+      supabase.auth.onAuthStateChange((event) => { if (event === 'SIGNED_OUT') setTimeout(() => showSession(null), 0); });
+    }
+  </script>
+<div id="storyViewer" class="sv hidden"></div>
+</body>
+</html>
